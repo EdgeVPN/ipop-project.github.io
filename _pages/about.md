@@ -18,5 +18,5 @@ You can help us show our impact to our sponsors and other users by linking to th
 
 If you publish a research paper that has leveraged the software, please include as references: 
 
-* The DOI for the software release that you used, and
+* The DOI for the software release that you used - [10.5281/zenodo.3968860](https://doi.org/10.5281/zenodo.3968860) as of release 20.7.2
 * The paper [K. Subratie, S. Aditya, V. Daneshmand, K. Ichikawa, R. Figueiredo, "On the Design and Implementation of IP-over-P2P Overlay Virtual Private Networks", IEICE Trans. Commmun., Vol.E103–B, No.1, January 2020](https://search.ieice.org/bin/pdf_link.php?category=B&lang=E&year=2020&fname=e103-b_1_2&abst=)
