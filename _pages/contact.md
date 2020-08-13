@@ -18,6 +18,6 @@ if you would like to report a bug or feature request
 ## <i class="fas fa-envelope"></i> Send an email to the project development leads
 if you have other inquiries:
 
-<i class="fas fa-user-tie"></i> Dr. Renato Figueiredo <i class="far fa-envelope"></i> ![Email](/assets/images/email_snapshot_rf_3.png)
+Dr. Renato Figueiredo <i class="far fa-envelope"></i> ![Email](/assets/images/email_snapshot_rf_3.png)
 
-<i class="fas fa-user-tie"></i> Dr. Kensworth Subratie <i class="far fa-envelope"></i> ![Email](/assets/images/email_snapshot_ks_3.png)
+Dr. Kensworth Subratie <i class="far fa-envelope"></i> ![Email](/assets/images/email_snapshot_ks_3.png)
