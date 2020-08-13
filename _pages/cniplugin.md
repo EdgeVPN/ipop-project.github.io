@@ -22,5 +22,5 @@ The host overlay connects the k8s **hosts** together in a flat virtual network n
 
 ## Pod overlay
 
-The pod overlay connects the k8s **pods** together in a different network namespace. This namespace is partitioned into separate subnets, one subnet per k8s host. Each pod gets its own virtual IP address in the subnet assigned to the host. In the examples below, we'll use the 10.244.0.0/16 network namespace for the pod overlay and 8-bit subnets for each host. For instance, pods in host A might be assigned addresses in 10.244.1.0/24, and in host B, 10.244.2.0/24, and so on.
+The pod overlay connects the k8s **pods** together in a different network namespace. This namespace is partitioned into separate subnets, one subnet per k8s host. Each pod gets its own virtual IP address in the subnet assigned to the host. In the examples below, we'll use the 10.244.0.0/16 network namespace for the pod overlay and 8-bit subnets for each host. For instance, pods in host A might be assigned addresses in the 10.244.**1**.0-10.244.**1**.254 range, and in host B in the 10.244.**2**.0-10.244.**2**.254 range, and so on.
 
