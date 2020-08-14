@@ -16,6 +16,8 @@ header:
 
 [Configure and deploy Docker EVio nodes](/dockeredgevpn)
 
+[Kubernetes integration for clustered Docker deployment](/cniplugin)
+
 ## <i class="fas fa-lightbulb"></i> Understand the basics
 
 [EdgeVPN.io architecture overview](/architecture)
