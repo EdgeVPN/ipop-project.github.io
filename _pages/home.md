@@ -44,7 +44,7 @@ EVio uses the standard [XMPP protocol](https://xmpp.org/) with short messages to
 EVio exposes a virtual Ethernet to its endpoints, and supports the ARP protocol, and unicast and IGMP-based multicast IP applications. *You can run existing IP-based applications over EdgeVPN without modifications*
 
 **Programmable and extensible:**
-The core packet-switching in EdgeVPN.io is programmable, using the [OpenFlow protocol for Software-Defined Networking](https://www.opennetworking.org/). EVio integrates with [Open vSwitch](https://www.openvswitch.org/) virtual switches, and endpoint interfaces are exposed via a virtual tap device. EVio can be deployed on physical and virtual machines, and in [Docker](https://www.docker.com/) containers. Integration with [Kubernetes](https://kubernetes.io) is forthcoming.
+The core packet-switching in EdgeVPN.io is programmable, using the [OpenFlow protocol for Software-Defined Networking](https://www.opennetworking.org/). EVio integrates with [Open vSwitch](https://www.openvswitch.org/) virtual switches, and endpoint interfaces are exposed via a virtual tap device. EVio can be deployed on physical and virtual machines, and in [Docker](https://www.docker.com/) containers. Integration with [Kubernetes](https://kubernetes.io) is supported with a CNI plug-in.
 
 **Built on standards:**
 EdgeVPN.io leverages standards for NAT traversal ([ICE](https://tools.ietf.org/html/rfc5245) with STUN and TURN), transport-layer security (TLS, DTLS), software-defined networking (OpenFlow), and short messaging (XMPP), and reuses the WebRTC open-source framework 
