@@ -33,7 +33,7 @@ sudo apt-get install -y openvswitch-switch \
                         containerd.io \
                         docker-ce-cli \
                         docker-ce 
-groupadd -f docker
+sudo groupadd -f docker
 sudo usermod -a -G docker $USER
 ```
 
