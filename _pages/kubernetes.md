@@ -24,7 +24,7 @@ There are two different ways EdgeVPN.io (Evio) can be used to support Kubernetes
 
 * Evio CNI plugin: While Flannel works unmodified atop an Evio overlay, there is a performance price that is paid: double-encapsulation. In essence, messages sent among pods are encapsulated twice (by Flannel, and by Evio). To address this drawback, Evio has its own CNI plugin, which allows messages to be encapsulated only once - by Evio:
 
-![K8s with Evio CNI plugin](/assets/images/evio-evio-overview_3.png)
+![K8s with Evio CNI plugin](/assets/images/evio-cni-overview_3.png)
 
 # <i class="fas fa-cubes"></i> Choosing a deployment mode
 
