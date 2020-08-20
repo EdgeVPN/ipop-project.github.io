@@ -18,11 +18,15 @@ Enter EdgeVPN.io - it provides a foundational virtual network layer that _expose
 
 There are two different ways EdgeVPN.io (Evio) can be used to support Kubernetes (K8s) deployments, both of which rely on the use of [CNI plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#cni):
 
-* Flannel: The Flannel CNI plugin is used in many K8s deployments. Like Evio itself, Flannel creates an _overlay network_ that exposes a virtual network namespace to K8s pods and uses encapsulation to tunnel messages between pods. Unlike Evio, however, Flannel _does not support NAT traversal_. Flannel can, however, leverage Evio's NAT traversal and virtualization - it's possible to deploy a Flannel overlay _atop the Evio overlay_:
+## Flannel
+
+The Flannel CNI plugin is used in many K8s deployments. Like Evio itself, Flannel creates an _overlay network_ that exposes a virtual network namespace to K8s pods and uses encapsulation to tunnel messages between pods. Unlike Evio, however, Flannel _does not support NAT traversal_. Flannel can, however, leverage Evio's NAT traversal and virtualization - it's possible to deploy a Flannel overlay _atop the Evio overlay_:
 
 ![K8s with Flannel CNI plugin over Evio](/assets/images/evio-flannel-overview_3.png)
 
-* Evio CNI plugin: While Flannel works unmodified atop an Evio overlay, there is a performance price that is paid: double-encapsulation. In essence, messages sent among pods are encapsulated twice (by Flannel, and by Evio). To address this drawback, Evio has its own CNI plugin, which allows messages to be encapsulated only once - by Evio:
+## Evio CNI plugin
+
+While Flannel works unmodified atop an Evio overlay, there is a performance price that is paid: double-encapsulation. In essence, messages sent among pods are encapsulated twice (by Flannel, and by Evio). To address this drawback, Evio has its own CNI plugin, which allows messages to be encapsulated only once - by Evio:
 
 ![K8s with Evio CNI plugin](/assets/images/evio-cni-overview_3.png)
 
