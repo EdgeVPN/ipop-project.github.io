@@ -8,7 +8,7 @@ header:
 
 # <i class="fas fa-cubes"></i> Introduction
 
-One of the key use cases of EdgeVPN.io is to enable deployment and management of Docker containers on resources both at the edge and cloud, and creating a virtual network spanning all the managed resources. To this end, Evio has a CNI (Container Network Interface) plug-in that allows for seamless integration with Kubernetes.
+One of the key use cases of EdgeVPN.io is to enable deployment and management of Docker containers on resources both at the edge and cloud, and creating a virtual network spanning all the managed resources. To this end, Evio offers a custom CNI (Container Network Interface) plug-in supports seamless integration with [Kubernetes](https://kubernetes.io) and avoids the extra encapsulation overhead introduced by Flannel.
 
 Inter-node communication between pods on Kubernetes is enabled by networking infrastructure set up by CNI plugins. This page overviews the architecture and setup of the Evio CNI plugin enabling Kubernetes hosts and pods to be connected by a virtual network - regardless of whether they reside in distributed edge resources with private addresses and behind NATs, where inter-node pod traffic is carried across authenticated, encrypted virtual network tunnels between nodes part of the Kubernetes cluster. 
 
@@ -26,7 +26,7 @@ The pod overlay connects the k8s **pods** together in a different network namesp
 
 The following figure illustrates; in the figure, two hosts on separate edge networks (with different NATs) are connected by an Evio tunnel. In edge host 1, the host is assigned an Evio virtual address 10.10.0.1, while host 2 is assigned 10.10.0.2. The two hosts use this host overlay interface to communicate (e.g. if host 1 is the kubeadm node, host 2 uses this interface to join the cluster). Pods deployed on hosts 1, 2 are assigned addresses on the pod overlay (e.g. in the figure below, pod 10.244.1.2 at the top left in host 1, pod 10.244.2.3 top right in host 2). Both overlays are tunneled through Evio. Note that the host IP addresses are not relevant - they could be private addresses on different namespaces; Evio's NAT traversal capabilities allow establishing tunnels that bootstrap the host/pod overlays with their own virtual address namespaces.
 
-![Overview of EdgeVPN.io Kubernetes integration](/assets/images/evio-cni-overview_2.png)
+![Overview of Evio plug-in for Kubernetes](/assets/images/evio-cni-overview_3.png)
 
 ## Evio CNI plugin architecture
 
