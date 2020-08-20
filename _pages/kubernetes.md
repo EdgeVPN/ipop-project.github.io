@@ -18,7 +18,18 @@ Enter EdgeVPN.io - it provides a foundational virtual network layer that _expose
 
 There are two different ways EdgeVPN.io (Evio) can be used to support Kubernetes (K8s) deployments, both of which rely on the use of [CNI plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#cni):
 
-* Flannel: The Flannel CNI plugin is used in many K8s deployments. Like Evio itself, Flannel creates an _overlay network_ that exposes a virtual network namespace to K8s pods and uses encapsulation to tunnel messages between pods. Unlike Evio, however, Flannel _does not support NAT traversal_. Flannel can, however, leverage Evio's NAT traversal and virtualization - it's possible to deploy a Flannel overlay _atop the Evio overlay_
+* Flannel: The Flannel CNI plugin is used in many K8s deployments. Like Evio itself, Flannel creates an _overlay network_ that exposes a virtual network namespace to K8s pods and uses encapsulation to tunnel messages between pods. Unlike Evio, however, Flannel _does not support NAT traversal_. Flannel can, however, leverage Evio's NAT traversal and virtualization - it's possible to deploy a Flannel overlay _atop the Evio overlay_:
 
-* Evio CNI plugin: While Flannel works unmodified atop an Evio overlay, there is a performance price that is paid: double-encapsulation. In essence, messages sent among pods are encapsulated twice (by Flannel, and by Evio). To address this drawback, Evio has its own CNI plugin, which allows messages to be encapsulated only once - by Evio.
+![K8s with Flannel CNI plugin over Evio](/assets/images/evio-flannel-overview_3.png)
 
+* Evio CNI plugin: While Flannel works unmodified atop an Evio overlay, there is a performance price that is paid: double-encapsulation. In essence, messages sent among pods are encapsulated twice (by Flannel, and by Evio). To address this drawback, Evio has its own CNI plugin, which allows messages to be encapsulated only once - by Evio:
+
+![K8s with Evio CNI plugin](/assets/images/evio-evio-overview_3.png)
+
+# <i class="fas fa-cubes"></i> Choosing a deployment mode
+
+Both approaches outlined above - Flannel and Evio CNI plugins - are possible. Which one is right for you? 
+
+* If you are already a user of Flannel, or if would like to test Evio for K8s for the first time, the Flannel approach is the simplest to deploy; [follow the documentation on using Evio with Flannel](/flannel) for more information on how to configure and deploy Evio for K8s.
+
+* If you want to extract the best performance and avoid the double-encapsulation overhead, [follow the documentation on deploying the Evio plugin](/cniplugin) for more information on how to configure and deploy Evio and the CNI plugin for K8s.
