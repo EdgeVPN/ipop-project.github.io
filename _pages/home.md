@@ -14,7 +14,7 @@ excerpt: "Seamlessly connect edge resources with a scalable virtual Ethernet"
 {::nomarkdown}<div class="background-white"><div class="center">{:/nomarkdown}
 ### <i class="fas fa-cubes"></i> EdgeVPN.io is an open-source software for deploying scalable VPNs across distributed edge resources 
 
-It groups distributed nodes into a logical Ethernet. EdgeVPN.io (also referred to as EVio, for short) has built-in support for packet capture, encryption, tunneling, forwarding, and NAT traversal, It builds on standard protocols, flexible software-defined networking, and a scalable overlay network architecture suitable for containerized applications
+It groups distributed nodes into a logical Ethernet. EdgeVPN.io (EVio, for short) has built-in support for packet capture, encryption, tunneling, forwarding, and NAT traversal, It builds on standard protocols, flexible software-defined networking, and a scalable overlay network architecture suitable for containerized applications
 
 
 
@@ -44,7 +44,10 @@ EVio uses the standard [XMPP protocol](https://xmpp.org/) with short messages to
 EVio exposes a virtual Ethernet to its endpoints, and supports the ARP protocol, and unicast and IGMP-based multicast IP applications. *You can run existing IP-based applications over EdgeVPN without modifications*
 
 **Programmable and extensible:**
-The core packet-switching in EdgeVPN.io is programmable, using the [OpenFlow protocol for Software-Defined Networking](https://www.opennetworking.org/). EVio integrates with [Open vSwitch](https://www.openvswitch.org/) virtual switches, and endpoint interfaces are exposed via a virtual tap device. EVio can be deployed on physical and virtual machines, and in [Docker](https://www.docker.com/) containers. Integration with [Kubernetes](https://kubernetes.io) is supported with a CNI plug-in.
+The core packet-switching in EdgeVPN.io is programmable, using the [OpenFlow protocol for Software-Defined Networking](https://www.opennetworking.org/). EVio integrates with [Open vSwitch](https://www.openvswitch.org/) virtual switches, and endpoint interfaces are exposed via a virtual tap device. EVio can be deployed on physical and virtual machines, and in [Docker](https://www.docker.com/) containers. 
+
+**Integration with Kubernetes:**
+Integration with [Kubernetes](https://kubernetes.io) is supported with either [Flannel or a custom Evio CNI plug-in](/kubernetes).
 
 **Built on standards:**
 EdgeVPN.io leverages standards for NAT traversal ([ICE](https://tools.ietf.org/html/rfc5245) with STUN and TURN), transport-layer security (TLS, DTLS), software-defined networking (OpenFlow), and short messaging (XMPP), and reuses the WebRTC open-source framework 
