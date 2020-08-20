@@ -28,6 +28,14 @@ header:
 
 [Configuring EVio nodes - complete description](/configfile)
 
+## <i class="fas fa-cogs"></i> Kubernetes integration
+
+[Kubernetes integration and deployment options](/kubernetes)
+
+[Kubernetes deployment with Flannel](/flannel)
+
+[Kubernetes deployment with Evio CNI plugin](/cniplugin)
+
 ## <i class="fas fa-cogs"></i> Additional deployment and configuration options 
 
 [Install EVio nodes from Debian package](/install)
