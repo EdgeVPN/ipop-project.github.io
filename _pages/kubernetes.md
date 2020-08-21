@@ -12,11 +12,11 @@ EdgeVPN.io provides a virtual network foundation for the deployment of various u
 
 Kubernetes is often deployed in cloud data centers, where the assumption is that all nodes are in the same address space - i.e., there are no NATs between Kubernetes hosts/pods. However, when deploying workloads across multiple _edge_ networks, this is seldom the case - nodes may be served by different providers, and be assigned private, NATed addresses. 
 
-Enter EdgeVPN.io - it provides a foundational virtual network layer that _exposes the networking model that Kubernetes requires_, essentially presenting Kubernetes daemons with an enviroment that is logically the same as they would encounter in a data center. Thus, EdgeVPN.io allows deployments across multiple disparate cloud/edge networks, where private addresses, NATs and firewalls are not uncommon - _without any changes_ - thus greatly improving the ability to deploy and management workloads that span cloud and edge resources and support "fog" computing for processing near IoT sensors/actuators.
+Enter EdgeVPN.io (Evio) - it provides a foundational virtual network layer that _exposes the networking model that Kubernetes requires_, essentially presenting Kubernetes daemons with an enviroment that is logically the same as they would encounter in a data center. Thus, EdgeVPN.io allows deployments across multiple disparate cloud/edge networks, where private addresses, NATs and firewalls are not uncommon - _without any changes_. In addition to NAT traversal, the Evio overlay virtual network is scalable, resilient, and self-configuring in response to nodes joining and leaving the cluster, greatly simplifying the management of the cluster's network. In combination with Kubernetes, Evio allows deployment of containerized, micro-service workloads spanning cloud and edge resources to support "fog" computing for processing near IoT sensors/actuators.
 
 # <i class="fas fa-cubes"></i> Deployment modes
 
-There are two different ways EdgeVPN.io (Evio) can be used to support Kubernetes (K8s) deployments, both of which rely on the use of [CNI plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#cni):
+There are two different ways Evio can be used to support Kubernetes (K8s) deployments, both of which rely on the use of [CNI plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#cni):
 
 ## Flannel
 
