@@ -22,7 +22,7 @@ There are two different ways EdgeVPN.io (Evio) can be used to support Kubernetes
 
 The Flannel CNI plugin is used in many K8s deployments. Like Evio itself, Flannel creates an _overlay network_ that exposes a virtual network namespace to K8s pods and uses encapsulation to tunnel messages between pods. Unlike Evio, however, Flannel _does not support NAT traversal_. Flannel can, however, leverage Evio's NAT traversal and virtualization - it's possible to deploy a Flannel overlay _atop the Evio overlay_:
 
-![K8s with Flannel CNI plugin over Evio](/assets/images/evio-flannel-overview_5.png)
+![K8s with Flannel CNI plugin over Evio](/assets/images/evio-flannel-overview_6.png)
 
 ## Evio CNI plugin
 
