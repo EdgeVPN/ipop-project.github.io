@@ -6,8 +6,11 @@ header:
   overlay_image: /assets/images/texture.png
 ---
 
+## <i class="fas fa-users"></i> [Join the EdgeVPN.io announcement group](https://groups.io/g/EdgeVPN-Announcements)
+to receive announcements about new features, releases, and events
+
 ## <i class="fas fa-users"></i> [Join the EdgeVPN.io users' group](https://groups.io/g/EdgeVPN)
-to ask questions and for important announcements
+to ask questions and connect with other users
 
 ## <i class="fab fa-slack"></i> Join our developers' Slack workspace
 if you are interested in contributing to the project - instructions are available in the user's group
