@@ -13,7 +13,7 @@ to receive announcements about new features, releases, and events
 to ask questions and connect with other users
 
 ## <i class="fab fa-slack"></i> Join our developers' Slack workspace
-if you are interested in contributing to the project - instructions are available in the user's group
+if you are interested in contributing as a developer, please first [join the EdgeVPN.io users' group](https://groups.io/g/EdgeVPN) and send us a message requesting access to the Slack workspace
 
 ## <i class="fab fa-github"></i> [Submit an issue on GitHub](https://github.com/EdgeVPN)
 if you would like to report a bug or feature request
