@@ -52,7 +52,7 @@ sudo apt-get install coturn
 
 3. Setup your configuration file
 
-Edit /etc/turnserver.conf to configure as follows:
+Edit /etc/turnserver.conf to configure as follows (note: set verbose for debugging only; the example sets test1 and password_test1 for a TURN user):
 
 ```
 realm=yourdomain.com
@@ -62,8 +62,8 @@ listening-port=3478
 min-port=10000
 max-port=20000
 log-file=/var/log/turnserver.log
-verbose                    # if you want a verbose log for debugging
-user=<username>:<password> # replace with username and password for TURN user
+verbose                    
+user=test1:password_test1
 ```
 
 3. Setup coturn service
