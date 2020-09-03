@@ -46,6 +46,8 @@ header:
 
 [Configuring Openfire XMPP and EdgeVPN.io with x509 certificate-based authentication](/openfireconfig)
 
+[Deploying all-in-one XMPP/TURN/STUN/MySQL server for Evio in Amazon EC2](https://github.com/EdgeVPNio/edgevpnio.github.io/wiki/Deploying-all-in-one-XMPP-STUN-TURN-server-with-containers)
+
 [Building EdgeVPN.io from source](/build)
 
 ## <i class="fas fa-tools"></i> Troubleshooting
