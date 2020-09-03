@@ -8,7 +8,7 @@ header:
 
 ## <i class="fab fa-docker"></i> Quick demo
 
-[Request trial accounts to test-drive Evio](/trial)
+[Use trial accounts to test-drive Evio](/trial)
 
 [Deploy a quick demo using Docker](/edgevpninabox)
 
