@@ -2,8 +2,12 @@
 main:
   - title: "About"
     url: /about/
+  - title: "Try"
+    url: /trial/
   - title: "Documentation"
     url: /documentation/
+  - title: "Demos"
+    url: /demos/
   - title: "Code"
     url: /code/
   - title: "Releases"
