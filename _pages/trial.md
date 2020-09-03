@@ -14,7 +14,7 @@ To support ramping-up many new users, the trial accounts are limited to five nod
 
 ## Step 1: request accounts and configuration file
 
-Click here to get started, and will review your request and contact you by email to provide you with configuration files. The information we ask for is:
+[Click here enter your request](https://forms.gle/2TTrt9nV32pFAHbb9); we will review and contact you by email to provide you with configuration files. The information we ask for is:
 
 * Contact email
 * Project name
