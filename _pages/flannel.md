@@ -40,7 +40,7 @@ The two key steps to configure Kubernetes to use the Evio host overlay are:
 $ sudo cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 # Note: This dropin only works with kubeadm and kubelet v1.11+
 [Service]
-Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --node-ip=10.10.100.2"
+Environment="KUBELET_CONFIG_ARGS=--config=/var/lib/kubelet/config.yaml --node-ip=10.10.100.2"
 ...
 ```
 
