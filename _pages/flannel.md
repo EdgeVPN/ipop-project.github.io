@@ -46,7 +46,11 @@ Environment="KUBELET_CONFIG_ARGS=--config=/var/lib/kubelet/config.yaml --node-ip
 
 * Retrive kube-flannel.yml file using wget or your preferred method from the [coreos/flannel website](https://github.com/coreos/flannel)  
 
-* Add the argument  - --iface=<Evio_app_bridge_name> corresponding to container command "/opt/bin/flanneld" in the kube-flannel.yml deployment file as shown in the example below. Replace <Evio_app_bridge_name> with the name of the bridge created by Evio in your host overlay (this name is the concatenation of the "NamePrefix" and overlay ID parameters from the [Evio configuration file](/configbasics); in the example below, it is "brlA1A111A"  
+* Add the argument  - --iface=<Evio_app_bridge_name> corresponding to container command "/opt/bin/flanneld" in the kube-flannel.yml deployment file as shown in the example below. 
+
+* Note: make sure you edit the entry that corresponds to the -amd64 architecture
+
+* Replace <Evio_app_bridge_name> with the name of the bridge created by Evio in your host overlay (this name is the concatenation of the "NamePrefix" and overlay ID parameters from the [Evio configuration file](/configbasics); in the example below, it is "brl101000F"  
 
 ```
  containers:
@@ -57,16 +61,16 @@ Environment="KUBELET_CONFIG_ARGS=--config=/var/lib/kubelet/config.yaml --node-ip
         args:
         - --ip-masq
         - --kube-subnet-mgr
-        - --iface=brlA1A111A
+        - --iface=brl101000F
         resources:
           requests:
 ```  
 
-(Note: you can double-check the Evio app bridge interface (brlA1A111A in the example) is configured with the virtual IP address (10.10.100.2 in the example) as follows:
+(Note: you can double-check the Evio app bridge interface (brl101000F in the example) is configured with the virtual IP address (10.10.100.2 in the example) as follows:
 
 ```
 $ ifconfig
-brlA1A111A: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1410
+brl101000F: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1410
         inet 10.10.100.2  netmask 255.255.0.0  broadcast 0.0.0.0
         inet6 fe80::1407:73ff:fe7e:5945  prefixlen 64  scopeid 0x20<link>
         ether 16:07:73:7e:59:45  txqueuelen 1000  (Ethernet)
