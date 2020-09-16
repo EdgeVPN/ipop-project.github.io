@@ -6,11 +6,9 @@ header:
   overlay_image: /assets/images/texture.png
 ---
 
-## <i class="fab fa-docker"></i> Quick demo
+## <i class="fab fa-docker"></i> Try Evio out for the first time
 
-[Use trial accounts to test-drive Evio](/trial)
-
-[Deploy a quick demo using Docker](/edgevpninabox)
+[Use trial accounts and Docker containers to test-drive Evio](/trial)
 
 ## <i class="fab fa-docker"></i> Deploy with Docker
 
@@ -18,25 +16,23 @@ header:
 
 [Configure and deploy Docker EVio nodes](/dockeredgevpn)
 
-[Kubernetes integration for clustered Docker deployment](/cniplugin)
-
-## <i class="fas fa-lightbulb"></i> Understand the basics
-
-[EdgeVPN.io architecture overview](/architecture)
-
-## <i class="fas fa-cog"></i> Understanding the configuration
-
-[Configuring EVio nodes - template and basic configuration](/configbasics) 
-
-[Configuring EVio nodes - complete description](/configfile)
-
-## <i class="fas fa-cogs"></i> Kubernetes integration
+## <i class="fas fa-cogs"></i> Use Evio to deploy Kubernetes across multiple edge providers
 
 [Kubernetes integration and deployment options](/kubernetes)
 
 [Kubernetes deployment with Flannel](/flannel)
 
 [Kubernetes deployment with Evio CNI plugin](/cniplugin)
+
+[Step-by-step deployment of Flannel+Evio Kubernetes cluster from scratch](https://github.com/EdgeVPNio/edgevpnio.github.io/wiki/Demo-of-Kubernetes-using-Flannel-over-EdgeVPN.io)
+
+## <i class="fas fa-lightbulb"></i> Understand Evio architecture and configuration
+
+[EdgeVPN.io architecture overview](/architecture)
+
+[Configuring EVio nodes - template and basic configuration](/configbasics) 
+
+[Configuring EVio nodes - complete description](/configfile)
 
 ## <i class="fas fa-cogs"></i> Additional deployment and configuration options 
 
@@ -50,11 +46,13 @@ header:
 
 [Building EdgeVPN.io from source](/build)
 
+[Test Evio with multiple containers in a single host](/edgevpninabox)
+
 ## <i class="fas fa-tools"></i> Troubleshooting
 
-Set up visualization service
+[Open issues](https://github.com/EdgeVPNio/evio/issues)
 
-Retrieving log files
+[Join our user's list to post questions](https://groups.io/g/EdgeVPN)
 
 ## <i class="fas fa-book"></i> Additional documentation and helpful resources
 
