@@ -22,7 +22,28 @@ To support ramping-up many new users, the trial accounts are limited to five nod
 
 ## Step 2: Deploy nodes
 
-Once you receive the configuration files, the easiest way to get started is to run Evio Docker containers in an x86/Linux computer, using the configuration files, as described in [this document](/document).
+Once you receive the configuration files, the easiest way to get started is to run Evio Docker containers in an x86/Linux computer, using the configuration files you received.
+
+To install Docker:
+
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+sudo apt-get update -y
+sudo apt-get install -y openvswitch-switch \
+                        python3 python3-pip python3-venv \
+                        apt-transport-https \
+                        ca-certificates \
+                        curl git \
+                        software-properties-common \
+                        containerd.io \
+                        docker-ce-cli \
+                        docker-ce 
+sudo groupadd -f docker
+sudo usermod -a -G docker $USER
+```
+
+Logout and login so that group changes are in effect.
 
 If you already have Docker installed, you just need to create a Docker network, and use the -v Docker option to mount the configuration file and log directory:
 
@@ -37,5 +58,5 @@ By default, the files configure node addresses in the 10.10.100.0/24 subnet, and
 
 ```
 docker exec -it evio001 /bin/bash
-# ping 10.10.100.22
+# ping 10.10.100.2
 ```
