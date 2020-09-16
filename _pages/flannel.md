@@ -12,6 +12,8 @@ One of the key use cases of EdgeVPN.io (Evio) is to enable deployment and manage
 
 This page overviews the approach to configure and setup Evio to support Kubernetes (K8s) with Flannel.
 
+You may also check out [step-by-step instructions to deploy a demo Kubernetes cluster with Flannel over Evio from scratch](https://github.com/EdgeVPNio/edgevpnio.github.io/wiki/Demo-of-Kubernetes-using-Flannel-over-EdgeVPN.io)
+
 # <i class="fas fa-cubes"></i> Overview
 
 The general approach to connect K8s pods via Flannel over Evio relies on deploying Evio software on all K8s hosts in the cluster. This creates a "flat" virtual network namespace connecting all K8s hosts. Then, you need to configure Kubernetes to use the virtual network address exposed by Evio. Then, Flannel can be setup and configured as you would normally do in a local cluster. The approach is illustrated below:
@@ -44,11 +46,11 @@ Environment="KUBELET_CONFIG_ARGS=--config=/var/lib/kubelet/config.yaml --node-ip
 ...
 ```
 
-* Retrive kube-flannel.yml file using wget or your preferred method from the [coreos/flannel website](https://github.com/coreos/flannel)  
+* Retrive kube-flannel.yml file (e.g. using wget or git) from the [coreos/flannel website](https://github.com/coreos/flannel/tree/master/Documentation)
 
-* Add the argument  - --iface=<Evio_app_bridge_name> corresponding to container command "/opt/bin/flanneld" in the kube-flannel.yml deployment file as shown in the example below. 
+* Edit kube-flannel.yml to add the argument  - --iface=<Evio_app_bridge_name> corresponding to container command "/opt/bin/flanneld" in the kube-flannel.yml deployment file as shown in the example below. 
 
-* Note: make sure you edit the entry that corresponds to the -amd64 architecture
+* Note: make sure you edit all applicable entry(ies) as there might be multiple entries under containers:
 
 * Replace <Evio_app_bridge_name> with the name of the bridge created by Evio in your host overlay (this name is the concatenation of the "NamePrefix" and overlay ID parameters from the [Evio configuration file](/configbasics); in the example below, it is "brl101000F"  
 
