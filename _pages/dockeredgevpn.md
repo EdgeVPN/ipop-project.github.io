@@ -52,7 +52,7 @@ mkdir logs/002
 
 ## Setup configuration files
 
-First, let's create a configuration file for a container that uses XMPP user test1.
+First, let's create a configuration file for a container that uses XMPP user test1. You may change the name of the user below.
 
 Copy and save this as /home/$USER/evio/config/config-001.json (the directory you created in the previous step) - *make sure you replace A.B.C.D with the IP address of your XMPP host:*
 
