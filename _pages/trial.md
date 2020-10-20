@@ -41,15 +41,17 @@ sudo apt-get install -y openvswitch-switch \
                         docker-ce 
 sudo groupadd -f docker
 sudo usermod -a -G docker $USER
+sudo docker network create dkrnet
 ```
 
 Logout and login so that group changes are in effect.
 
-If you already have Docker installed, you just need to create a Docker network, and use the -v Docker option to mount the configuration file and log directory:
+If you already have Docker installed, you just need to create a Docker network, and use the -v Docker option to mount the configuration file and log directory.
+
+You can start the container and bind to the host's network as follows this will achieve better NAT traversal behavior. Alternatively, you can replace _host_ with _dkrnet_ below to use Docker's NAT - however, the default Docker NAT behavior requires TURN for traversal.
 
 ```
-sudo docker network create dkrnet
-docker run -d -v /path_to/config-001.json:/etc/opt/edge-vpnio/config.json -v /path_to/logs/001:/var/log/edge-vpnio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:20.7 /sbin/init
+docker run -d -v /path_to/config-001.json:/etc/opt/edge-vpnio/config.json -v /path_to/logs/001:/var/log/edge-vpnio/ --rm --privileged --name evio001 --network host edgevpnio/evio-node:20.7 /sbin/init
 ```
 
 ## Step 3: Test it out
