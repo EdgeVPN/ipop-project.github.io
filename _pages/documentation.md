@@ -59,3 +59,5 @@ header:
 [The EdgeVPN.io wiki](https://github.com/EdgeVPN/edgevpn.github.io/wiki)
 
 [An introduction to NAT traversal and STUN/TURN](https://temasys.io/webrtc-ice-sorcery/)
+
+[Another useful documentat on NAT traversal](https://www.netmanias.com/en/post/techdocs/6062/nat-network-protocol/nat-behavioral-requirements-as-defined-by-the-ietf-rfc-4787-part-2-filtering-behavior)
