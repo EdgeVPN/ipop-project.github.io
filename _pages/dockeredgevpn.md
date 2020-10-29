@@ -38,6 +38,12 @@ sudo docker network create dkrnet
 
 **Note: Make sure you log out and back in again so the docker group addition is in effect
 
+**Note: If you are using Ubuntu 20.04, start OVS manually:
+
+```
+sudo systemctl start ovs-vswitchd.service
+```
+
 Now, create directories in the host to hold configuration files and logs for your containers:
 
 ```
