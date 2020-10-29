@@ -46,6 +46,12 @@ sudo docker network create dkrnet
 
 Logout and login so that group changes are in effect.
 
+**Note: If you are using Ubuntu 20.04, start OVS manually:
+
+```
+sudo systemctl start ovs-vswitchd.service
+```
+
 If you already have Docker installed, you just need to create a Docker network, and use the -v Docker option to mount the configuration file and log directory.
 
 You can start the container and bind to the dkrnet network as follows. Alternatively, you can replace _dkrnet_ with _host_ below to use Docker's host networking - if you only run a single container in your host.
