@@ -30,6 +30,8 @@ header:
 
 [EdgeVPN.io architecture overview](/architecture)
 
+[EdgeVPN.io architecture overview - video](https://www.youtube.com/watch?v=cdALqov35Zk)
+
 [Configuring EVio nodes - template and basic configuration](/configbasics) 
 
 [Configuring EVio nodes - complete description](/configfile)
