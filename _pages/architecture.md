@@ -8,7 +8,7 @@ header:
 
 # Introduction
 
-This document describes the architecture of EdgeVPN.io, at a high level - not diving deep into the code, but overviewing the major modules and their interactions. The target audience is developers who are interested in contributing to the code base.
+This document - [and an associated video presentation](https://www.youtube.com/watch?v=cdALqov35Zk) - describes the architecture of EdgeVPN.io, at a high level - not diving deep into the code, but overviewing the major modules and their interactions. The target audience is developers who are interested in contributing to the code base.
 
 # Background
 
