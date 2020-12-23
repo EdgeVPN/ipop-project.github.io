@@ -16,6 +16,10 @@ header:
 
 [Configure and deploy Docker EVio nodes](/dockeredgevpn)
 
+## <i class="fab fa-docker"></i> Deploy with deb package for x86 and ARM
+
+[Deploy EVio nodes from Debian package](/install)
+
 ## <i class="fas fa-cogs"></i> Use Evio to deploy Kubernetes across multiple edge providers
 
 [Kubernetes integration and deployment options](/kubernetes)
@@ -37,8 +41,6 @@ header:
 [Configuring EVio nodes - complete description](/configfile)
 
 ## <i class="fas fa-cogs"></i> Additional deployment and configuration options 
-
-[Install EVio nodes from Debian package](/install)
 
 [Set up STUN and TURN servers](/stunturn)
 
