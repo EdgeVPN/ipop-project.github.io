@@ -187,11 +187,16 @@ To configure the second container, copy config-001.json to config-002.json, **an
 
 Now you will run two containers, named evio001 and evio002, mapping the different configuration file and the log directories to different mount points. **Note:** the examples below use the dkrnet network and Docker NAT. This requires TURN if you connect multiple hosts. If you plan to run a single container in your host, it's advisable you use the host's network instead, by replacing _dkrnet_ by _host_ below.
 
-```
-docker run -d -v /home/$USER/evio/config/config-001.json:/etc/opt/edge-vpnio/config.json -v /home/$USER/evio/logs/001:/var/log/edge-vpnio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:20.7 /sbin/init
+### Instructions for Evio 20.12.0 and above:
 
-docker run -d -v /home/$USER/evio/config/config-002.json:/etc/opt/edge-vpnio/config.json -v /home/$USER/evio/logs/002:/var/log/edge-vpnio/ --rm --privileged --name evio002 --network dkrnet edgevpnio/evio-node:20.7 /sbin/init
+*NOTE* Evio versions 20.12.0+ have moved the configuration file location to /etc/opt/evio:
+
 ```
+docker run -d -v /home/$USER/evio/config/config-001.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/001:/var/log/edge-vpnio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:20.12.0 /sbin/init
+
+docker run -d -v /home/$USER/evio/config/config-002.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/002:/var/log/edge-vpnio/ --rm --privileged --name evio002 --network dkrnet edgevpnio/evio-node:20.12.0 /sbin/init
+```
+
 
 ## Test your connection
 
@@ -208,4 +213,6 @@ Or, the other way around:
 docker exec -it evio002 /bin/bash
 # ping 10.10.10.21
 ```
+
+
 
