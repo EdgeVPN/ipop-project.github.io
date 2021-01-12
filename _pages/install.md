@@ -10,7 +10,7 @@ header:
 
 As of version 20.12.0, Evio can run on both amd64 platforms (the majority of commodity edge/cloud resources), as well as on armhf (edge platforms such as Raspberry Pi) with Ubuntu Linux 18.04 and 20.04. 
 
-*NOTE* For Raspberry Pi users, we strongly recommend running Ubuntu 20.04 server. Raspian installation is more cumbersome, and we focus our support on Ubuntu 20.04.
+*NOTE* For Raspberry Pi users, *we currently only support Ubuntu 20.04 server*. Raspian does more aggressive use of DHCP and, while possible to work around it, we do not have a clean approach to supporting Raspian as of yet. If you would like to try Raspian, it requires disabling DHCP on *all* interfaces, as described at the end of this document.
 
 ## Get deb Package
 Download the latest release from [the GitHub repository](https://github.com/EdgeVPNio/evio/releases/).
@@ -64,3 +64,14 @@ sudo systemctl disable evio
 ```shell
 sudo apt remove -y evio
 ```
+
+### Disabling DHCP in Raspian-based Raspberry Pis
+
+We only support Ubuntu 20.04; if you'd like to try Evio on Raspian, until we find a reliable solution, use at your own risk. You need to disable DHCP by editing /etc/dhcpcd.conf as follows (note: the bridge names will depend on the identifier you give to your Evio network - the example below assumes 101000F):
+
+```
+noipv4ll
+denyinterfaces brl101000F ovs-system
+denyinterfaces edgbr101000F ovs-system
+```
+
