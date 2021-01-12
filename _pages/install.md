@@ -17,8 +17,9 @@ Download the latest release from [the GitHub repository](https://github.com/Edge
 
 ### Version 20.12.0
 
-[amd64 package](https://github.com/EdgeVPNio/evio/releases/download/v20.12.0/evio_20.12.0_amd64.deb)
-[armhf package](https://github.com/EdgeVPNio/evio/releases/download/v20.12.0/evio_20.12.0_armhf.deb)
+[Download the package for x86/amd64 Ubuntu nodes](https://github.com/EdgeVPNio/evio/releases/download/v20.12.0/evio_20.12.0_amd64.deb)
+
+[Download the package for armhf Ubuntu Raspberry Pis](https://github.com/EdgeVPNio/evio/releases/download/v20.12.0/evio_20.12.0_armhf.deb)
 
 ## Install deb Package
 
