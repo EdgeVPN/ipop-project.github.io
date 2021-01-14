@@ -18,7 +18,9 @@ The first step is to locate the log files - they will give you clues to troubles
 
 * Locate the log files for controller, bounded flood, and tincan. These are specified in the configuration file - by default, you will find them under a directory created in /var/log/, with names: bf.log, ctrl.log.*, and tincan_log_*
 
-## Check for XMPP problems
+## Troubleshoot XMPP 
+
+### Gathering information
 
 If your Evio node is unable to connect and authenticate to the configured XMPP server, the node will not work. So, this is the first area to investigate; you should check that:
 
@@ -45,9 +47,101 @@ If your Evio node is unable to connect and authenticate to the configured XMPP s
 
 * If you have access to the XMPP server (e.g. if you are running your own Openfire), log in to the admin Web interface and, while the Evio node is running, verify that there is an active session to the XMPP server
 
-## Check for bounded flood problems
+### Fixing the problem
 
-## Check for NAT traversal problems
+* This is outside the scope of Evio - you need to fix either the configuration, or the XMPP server. Once you are confident the node authenticates to XMPP, if the problem persists, continue to the next step
+
+## Troubleshoot bounded flood (BF) 
+
+### Gathering information
+
+* It is possible the BF module fails to initialize properly. One way to check this is:
+
+```
+grep DPSet bf.log
+```
+
+If there is no output, or if the output shows an empty set under port_state, as shown below, your BF module was not initialized properly:
+
+```
+0915 10:55:39.469 INFO: DPSet.port_state {}
+```
+
+### Fixing the problem
+
+* The current solution to this problem is to restart Evio:
+
+```
+sudo systemctl restart evio
+```
+
+* If, after a restart, the problem with the BF module has gone away, but your node is still unable to join the netowrk, continue to the next step
+
+## Troubleshoot NAT traversal
+
+### Gathering information
+
+* It is possible that either your Evio node is misconfigured, or STUN and/or TURN services are not available to perform NAT traversal
+
+* First, ensure that the IP address(es) and port(s) listed under LinkManager in the configuration file are correct for your STUN server, and that the STUN server is reachable from your node. If you use Google STUN servers, chances are they are working properly, as they are well-provisioned and reliable:
+
+```
+"Stun": [
+      "stun.l.google.com:19302",
+      "stun1.l.google.com:19302"
+    ],
+```
+
+* You can check STUN activity in the log file as follows; ou should see several lines with local_candidate at the output:
+
+```
+grep -i stun tincan_log_* | more
+```
+
+* If you see STUN messages that indicate correct activity, it's possible your node is behind a symmetric NAT and needs TURN for NAT traversal
+
+* One tool to help check the behavior of your NAT is [Stuntman](http://www.stunprotocol.org/) - install it on your node, and check the output of the command:
+
+```
+stunclient --mode full stun.stunprotocol.org
+```
+
+* An example of an output of a STUN-amenable NAT is:
+
+```
+Binding test: success
+Local address: 172.17.111.10:38382
+Mapped address: XXX.YYY.ZZZ.WWW:38382
+Behavior test: success
+Nat behavior: Endpoint Independent Mapping
+Filtering test: success
+Nat filtering: Endpoint Independent Filtering
+```
+
+* An example of a NAT that requires TURN for traversal:
+
+```
+Binding test: success
+Local address: 172.18.0.2:40881
+Mapped address: XXX.YYY.ZZZ.WWW:40881
+Behavior test: success
+Nat behavior: Endpoint Independent Mapping
+Filtering test: success
+Nat filtering: Address and Port Dependent Filtering
+```
+
+* If you have TURN configured, check that Evio is able to successfully allocate TURN sessions. The output of the following command should be non-empty:
+
+```
+grep "TURN allocate requested successfully" tincan_log_* | more
+```
+
+### Fixing the problem
+
+* Ensure that the STUN server(s) is(are) properly configured and reachable
+
+* If your NAT requires TURN traversal, ensure the TURN server(s) are properly configured and reachable
+
 
 # <i class="fas fa-bug"></i> Finding and Submitting Bugs
 
