@@ -14,16 +14,8 @@ Docker containers can be found in the [EdgeVPNio organization in DockerHub](http
 # <i class="fas fa-user-plus"></i> How to Contribute
 We welcome community involvement and participation in all aspects of the EdgeVPN.io project. There are several meaningful ways for external participants to contribute. Below we discuss the ways that we can benefit from your contributions and effective ways of going about this.
 
-## <i class="fas fa-bug"></i> Finding and Submitting Bugs
-If you encounter any bugs while testing, evaluating or in your everyday use the software, [please create a GitHub issue to report it](https://github.com/EdgeVPNio/evio/issues). Of course submitting the relevant information that will help us reproduce and diagnose the fault is important. If you run into errors/crashes, please proceed as follows:
-
-* Set the [logging level in the configuration file to DEBUG](/configfile), and try to recreate the problem
-
-* Retrieve the log files for controller and tincan - the file names are also specified in the configuration file
-
-* Upload the log files to an accessible repository where we can retrieve them, and submit a GitHub issue
-
-* Additionally, provide the EdgeVPN.io version, the platform being used, and configuration file(s) used (please ensure you remove sensitive information, such as XMPP and TURN user name/password)
+## <i class="fas fa-bug"></i> Troubleshooting Bugs
+Please refer to the [troubleshooting page](/troubleshoot) for helpful hints and information on how to troubleshoot and submit bug reports.
 
 ## <i class="fas fa-plus"></i> Enhancements and Feature Suggestions
 While using our software you may envision new and interesting ways that it can be used. As a research group we are always excited to hear these ideas - [please get in touch with us, let us know, and join the user's group and developer's Slack channel](/about). We have finite resources and cannot guarantee that any requested feature will be implemented, but others in the community could be interested. 
