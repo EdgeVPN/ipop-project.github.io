@@ -54,6 +54,8 @@ header:
 
 ## <i class="fas fa-tools"></i> Troubleshooting
 
+[Troubleshooting and reporting bugs](/troubleshoot)
+
 [Open issues](https://github.com/EdgeVPNio/evio/issues)
 
 [Join our user's list to post questions](https://groups.io/g/EdgeVPN)
