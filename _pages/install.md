@@ -23,14 +23,17 @@ Download the latest release from [the GitHub repository](https://github.com/Edge
 
 ## Install deb Package
 
+### On x86 Ubuntu:
+
 ```shell
 sudo apt install -y <path/to>/evio_*.deb
 ```
 
-*NOTE* For Raspberry Pi users, if installation fails during building of slixmpp dependences, please add:
+### On amrhf Raspberry Pi:
 
 ```shell
 sudo apt-get install libffi-dev
+sudo apt install -y <path/to>/evio_*.deb
 ```
 
 ## Edit Configuration File
