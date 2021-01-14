@@ -23,13 +23,13 @@ Download the latest release from [the GitHub repository](https://github.com/Edge
 
 ## Install deb Package
 
-### On x86 Ubuntu:
+### On x86/amd64 Ubuntu:
 
 ```shell
 sudo apt install -y <path/to>/evio_*.deb
 ```
 
-### On amrhf Raspberry Pi:
+### On amrhf Raspberry Pi Ubuntu:
 
 ```shell
 sudo apt-get install libffi-dev
