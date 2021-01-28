@@ -10,7 +10,7 @@ header:
 
 [Use trial accounts and Docker containers to test-drive Evio](/trial)
 
-## <i class="fab fa-cogs"></i> Deploy Evio nodes 
+## <i class="fas fa-cogs"></i> Deploy Evio nodes 
 
 [Deploy Docker EVio nodes (x86)](/dockeredgevpn)
 
