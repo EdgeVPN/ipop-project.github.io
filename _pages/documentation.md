@@ -10,47 +10,31 @@ header:
 
 [Use trial accounts and Docker containers to test-drive Evio](/trial)
 
-## <i class="fab fa-docker"></i> Deploy with Docker
+## <i class="fab fa-cogs"></i> Deploy Evio nodes 
 
-[Configure and deploy Docker Openfire XMPP server](/openfiredocker)
+[Deploy Docker EVio nodes (x86)](/dockeredgevpn)
 
-[Configure and deploy Docker EVio nodes](/dockeredgevpn)
+[Deploy Evio nodes from Debian package (x86 and Raspberry Pi)](/install)
 
-## <i class="fab fa-docker"></i> Deploy with deb package for x86 and ARM
+## <i class="fas fa-cogs"></i> Deploy Evio Boostrap Server
 
-[Deploy EVio nodes from Debian package](/install)
+[Deploy Evio bootstrap SMPP/TURN server on AWS](/AWSbootstrap)
 
 ## <i class="fas fa-cogs"></i> Use Evio to deploy Kubernetes across multiple edge providers
 
-[Kubernetes integration and deployment options](/kubernetes)
-
 [Kubernetes deployment with Flannel](/flannel)
 
-[Kubernetes deployment with Evio CNI plugin](/cniplugin)
-
-[Step-by-step deployment of Flannel+Evio Kubernetes cluster from scratch](https://github.com/EdgeVPNio/edgevpnio.github.io/wiki/Demo-of-Kubernetes-using-Flannel-over-EdgeVPN.io)
-
-## <i class="fas fa-lightbulb"></i> Understand Evio architecture and configuration
+## <i class="fas fa-lightbulb"></i> Understand the Evio architecture 
 
 [EdgeVPN.io architecture overview](/architecture)
 
 [EdgeVPN.io architecture overview - video](https://www.youtube.com/watch?v=cdALqov35Zk)
 
+## <i class="fas fa-lightbulb"></i> Understand Evio configuration
+
 [Configuring EVio nodes - template and basic configuration](/configbasics) 
 
 [Configuring EVio nodes - complete description](/configfile)
-
-## <i class="fas fa-cogs"></i> Additional deployment and configuration options 
-
-[Set up STUN and TURN servers](/stunturn)
-
-[Configuring Openfire XMPP and EdgeVPN.io with x509 certificate-based authentication](/openfireconfig)
-
-[Deploying all-in-one XMPP/TURN/STUN/MySQL server for Evio in Amazon EC2](https://github.com/EdgeVPNio/edgevpnio.github.io/wiki/Deploying-all-in-one-XMPP-STUN-TURN-server-with-containers)
-
-[Building EdgeVPN.io from source](/build)
-
-[Test Evio with multiple containers in a single host](/edgevpninabox)
 
 ## <i class="fas fa-tools"></i> Troubleshooting
 
@@ -60,7 +44,26 @@ header:
 
 [Join our user's list to post questions](https://groups.io/g/EdgeVPN)
 
-## <i class="fas fa-book"></i> Additional documentation and helpful resources
+
+## <i class="fas fa-book"></i> Additional deployment and configuration options and helpful resources
+
+[Set up STUN and TURN servers](/stunturn)
+
+[Configuring Openfire XMPP and EdgeVPN.io with x509 certificate-based authentication](/openfireconfig)
+
+[Kubernetes integration and deployment options](/kubernetes)
+
+[Kubernetes deployment with Evio CNI plugin](/cniplugin)
+
+[Configure and deploy Docker Openfire XMPP server](/openfiredocker)
+
+[Step-by-step XMPP/TURN/MySQL Evio bootstrap server deployment in AWS](https://github.com/EdgeVPNio/edgevpnio.github.io/wiki/Deploying-all-in-one-XMPP-STUN-TURN-server-with-containers)
+
+[Step-by-step deployment of Flannel+Evio Kubernetes cluster from scratch](https://github.com/EdgeVPNio/edgevpnio.github.io/wiki/Demo-of-Kubernetes-using-Flannel-over-EdgeVPN.io)
+
+[Building EdgeVPN.io from source](/build)
+
+[Test Evio with multiple containers in a single host](/edgevpninabox)
 
 [The EdgeVPN.io wiki](https://github.com/EdgeVPN/edgevpn.github.io/wiki)
 
