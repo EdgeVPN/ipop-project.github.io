@@ -22,16 +22,17 @@ First, log in to the AWS console, and deploy an instance as follows:
 * Suggested configuration: t3.medium with 32GB disk
 * You must configure the following security group policies for inbound traffic:
 
-| Type            | Protocol | Port range          | Source     | Description |
-| --------------- | -------- | ------------------- | ---------- | ----------- |
-| Custom UDP Rule | UDP      | 3478                | 0.0.0.0/0  | coturn      |
-| Custom TCP Rule | TCP      | 3478                | 0.0.0.0/0  | coturn      |
-| Custom UDP Rule | UDP      | 49160 - 59200       | 0.0.0.0/0  | coturn      |
-| SSH             | TCP      | 22                  | 0.0.0.0/0  | SSH         |
-| Custom TCP Rule | TCP      | 5222 - 5223         | 0.0.0.0/0  | XMPP        |
-| Custom TCP Rule | TCP      | 9090 - 9091         | See note!! | openfire    |
+| Type            | Protocol | Port range          | Source           | Description |
+| --------------- | -------- | ------------------- | ---------------- | ----------- |
+| Custom UDP Rule | UDP      | 3478                | 0.0.0.0/0        | coturn      |
+| Custom TCP Rule | TCP      | 3478                | 0.0.0.0/0        | coturn      |
+| Custom UDP Rule | UDP      | 49160 - 59200       | 0.0.0.0/0        | coturn      |
+| SSH             | TCP      | 22                  | 0.0.0.0/0        | SSH         |
+| Custom TCP Rule | TCP      | 5222 - 5223         | 0.0.0.0/0        | XMPP        |
+| Custom TCP Rule | TCP      | 9090 - 9091         | See note!!       | openfire    |
+|                 | TCP      |                     | AWS_PUBLIC_IP/32 | openfire    |
 
-Note: the last TCP rule for ports 9090-9091 specify which addresses can access the admin interface for Openfire. It is strongly recommended that, instead of opening up to the world (0.0.0.0/0) you provide the list of IP addresses of each admin user who will manage the XMPP server.
+Note: the last TCP rule for ports 9090-9091 specify which addresses can access the admin interface for Openfire. It is strongly recommended that, instead of opening up to the world (0.0.0.0/0) you provide the list of IP addresses of each admin user who will manage the XMPP server - including your AWS_PUBLIC_IP so you can ssh-tunnel into it.
 
 # Log in to your instance and deploy services
 
