@@ -91,6 +91,7 @@ XMPP_DOMAIN: FQDN
 Now let's create a five test accounts and an overlay named Test1:
 
 ```
+cd ~/evio-config-gen
 python3 generate_evio_config_trial.py --sqlpass=your_mysql_root_password --email=someone@somewhere.com --evioname=Test1 --baseip=10.10.100 --numnodes=5 --numacct=5
 ```
 
