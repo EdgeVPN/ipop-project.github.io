@@ -33,7 +33,7 @@ Download the latest release from [the GitHub repository](https://github.com/Edge
 sudo apt install -y <path/to>/evio_*.deb
 ```
 
-### On amrhf Raspberry Pi Ubuntu:
+### On amrhf or arm64 Raspberry Pi Ubuntu:
 
 ```shell
 sudo apt-get install libffi-dev
