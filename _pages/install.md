@@ -25,12 +25,6 @@ Download the latest release from [the GitHub repository](https://github.com/Edge
 
 *Note:* The arm64 package has been tested in Raspberry Pi and Amazon ARM64 instances. We are working on fixing Ubuntu package dependences to support installation on nVidia Jetson devices.
 
-### Version 20.12.0
-
-[Download the package for x86/amd64 Ubuntu nodes](https://github.com/EdgeVPNio/evio/releases/download/v20.12.0/evio_20.12.0_amd64.deb)
-
-[Download the package for armhf Ubuntu Raspberry Pis](https://github.com/EdgeVPNio/evio/releases/download/v20.12.0/evio_20.12.0_armhf.deb)
-
 ## Install deb Package
 
 ### On x86/amd64 Ubuntu:
