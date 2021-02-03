@@ -65,24 +65,15 @@ Copy and save this as /home/$USER/evio/config/config-001.json (the directory you
 ```json
 {
   "CFx": {
-    "Model": "Default",
-    "Overlays": [
-      "101000F"
-    ]
+    "Overlays": [ "MyTest" ]
   },
   "Logger": {
     "LogLevel": "DEBUG",
-    "Device": "File",
-    "Directory": "/var/log/edge-vpnio/",
-    "CtrlLogFileName": "ctrl.log",
-    "TincanLogFileName": "tincan_log",
-    "MaxFileSize": 10000000,
-    "MaxArchives": 1
+    "Directory": "/var/log/evio/"
   },
   "Signal": {
-    "Enabled": true,
     "Overlays": {
-      "101000F": {
+      "MyTest": {
         "HostAddress": "A.B.C.D",
         "Port": "5222",
         "Username": "test1@openfire.local",
@@ -92,30 +83,18 @@ Copy and save this as /home/$USER/evio/config/config-001.json (the directory you
     }
   },
   "Topology": {
-    "PeerDiscoveryCoalesce": 1,
     "Overlays": {
-      "101000F": {
-        "Name": "SymphonyRing",
-        "Description": "Scalable Symphony Ring Overlay for Bounded Flooding.",
+      "MyTest": {
         "MaxSuccessors": 2,
-        "MaxOnDemandEdges": 1,
-        "MaxConcurrentEdgeSetup": 5,
+        "MaxOnDemandEdges": 3,
         "Role": "Switch"
       }
     }
   },
   "LinkManager": {
-    "Dependencies": [
-      "Logger",
-      "TincanInterface",
-      "Signal"
-    ],
-    "Stun": [
-      "stun.l.google.com:19302",
-      "stun1.l.google.com:19302"
-    ],
+    "Stun": [ "stun.l.google.com:19302", "stun1.l.google.com:19302" ],
     "Overlays": {
-      "101000F": {
+      "MyTest": {
         "Type": "TUNNEL",
         "TapName": "tnl-"
       }
@@ -127,43 +106,38 @@ Copy and save this as /home/$USER/evio/config/config-001.json (the directory you
     "WebService": "https://qdscz6pg37.execute-api.us-west-2.amazonaws.com/default/EvioUsageReport"
   },
   "BridgeController": {
-    "Dependencies": [
-      "Logger",
-      "LinkManager"
-    ],
     "BoundedFlood": {
-      "OverlayId": "101000F",
-      "LogDir": "/var/log/edge-vpnio/",
+      "OverlayId": "MyTest",
+      "LogDir": "/var/log/evio/",
       "LogFilename": "bf.log",
-      "LogLevel": "INFO",
-      "BridgeName": "edgbr",
+      "LogLevel": "DEBUG",
+      "BridgeName": "evio",
       "DemandThreshold": "100M",
       "FlowIdleTimeout": 60,
       "FlowHardTimeout": 60,
       "MulticastBroadcastInterval": 60,
       "MaxBytes": 10000000,
-      "BackupCount": 0,
+      "BackupCount": 2,
       "ProxyListenAddress": "",
       "ProxyListenPort": 5802,
       "MonitorInterval": 60,
       "MaxOnDemandEdges": 0
     },
     "Overlays": {
-      "101000F": {
+      "MyTest": {
         "NetDevice": {
           "AutoDelete": true,
           "Type": "OVS",
           "SwitchProtocol": "BF",
-          "NamePrefix": "edgbr",
+          "NamePrefix": "evio",
           "MTU": 1410,
           "AppBridge": {
             "AutoDelete": true,
             "Type": "OVS",
-            "NamePrefix": "brl",
+            "NamePrefix": "appbr",
             "IP4": "10.10.10.21",
             "PrefixLen": 24,
-            "MTU": 1410,
-            "NetworkAddress": "10.10.10.0/24"
+            "MTU": 1410
           }
         },
         "SDNController": {
@@ -187,14 +161,14 @@ To configure the second container, copy config-001.json to config-002.json, **an
 
 Now you will run two containers, named evio001 and evio002, mapping the different configuration file and the log directories to different mount points. **Note:** the examples below use the dkrnet network and Docker NAT. This requires TURN if you connect multiple hosts. If you plan to run a single container in your host, it's advisable you use the host's network instead, by replacing _dkrnet_ by _host_ below.
 
-### Instructions for Evio 20.12.0 and above:
+### Instructions for Evio 20.12.1 and above:
 
 *NOTE* Evio versions 20.12.0+ have moved the configuration file location to /etc/opt/evio:
 
 ```
-docker run -d -v /home/$USER/evio/config/config-001.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/001:/var/log/edge-vpnio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:20.12.0 /sbin/init
+docker run -d -v /home/$USER/evio/config/config-001.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/001:/var/log/evio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:20.12.1 /sbin/init
 
-docker run -d -v /home/$USER/evio/config/config-002.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/002:/var/log/edge-vpnio/ --rm --privileged --name evio002 --network dkrnet edgevpnio/evio-node:20.12.0 /sbin/init
+docker run -d -v /home/$USER/evio/config/config-002.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/002:/var/log/evio/ --rm --privileged --name evio002 --network dkrnet edgevpnio/evio-node:20.12.1 /sbin/init
 ```
 
 
