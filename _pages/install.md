@@ -25,6 +25,13 @@ Download the latest release from [the GitHub repository](https://github.com/Edge
 
 *Note:* The arm64 package has been tested in Raspberry Pi and Amazon ARM64 instances. We are working on fixing Ubuntu package dependences to support installation on nVidia Jetson devices.
 
+*Note:* We have identified a bug that is triggered by multicast IPv6 packets. While we work to fix the bug for a maintenance release, it is recommended that you disable IPv6 on your nodes:
+
+```
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+```
+
 ## Install deb Package
 
 ### On x86/amd64 Ubuntu:
