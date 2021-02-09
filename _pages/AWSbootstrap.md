@@ -14,6 +14,8 @@ The main requirement is that you have an Amazon AWS account, and that you are fa
 
 You can get started with a baseline EC2 Ubuntu 18.04 instance and use an IP address assigned by AWS on startup. The recommended deployment model is to use an Elastic IP address that has a DNS mapping, but it is not a requirement.
 
+## Acknowledgment
+
 *This cloud resource is supported by community funds provided by [CloudBank](https://www.cloudbank.org/), which is supported by National Science Foundation award [#1925001](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1925001)*
 
 # Deploy AWS instance
