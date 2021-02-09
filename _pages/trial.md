@@ -70,6 +70,4 @@ docker exec -it evio001 /bin/bash
 # ping 10.10.100.2
 ```
 
-## Acknowledgment
 
-*This cloud resource is supported by community funds provided by [CloudBank](https://www.cloudbank.org/), which is supported by National Science Foundation award [#1925001](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1925001)*
