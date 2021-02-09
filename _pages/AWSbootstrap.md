@@ -107,10 +107,6 @@ chmod 755 *.sh
 Now you can copy the .json files for each of your Evio nodes, and start them up as described in the [installation instructions](https://edgevpn.io/install/) or, [these instructions if you use Docker](https://edgevpn.io/dockeredgevpn/).
 
 
-## Acknowledgment
-
-*This cloud resource is supported by community funds provided by [CloudBank](https://www.cloudbank.org/), which is supported by National Science Foundation award [#1925001](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1925001)*
-
 
 
 
