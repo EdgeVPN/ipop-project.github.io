@@ -12,6 +12,10 @@ The EdgeVPN.io team is hosting an XMPP+TURN service in the cloud to help new use
 
 To support ramping-up many new users, the trial accounts are limited to five nodes and expire in a 2-week period; these may change depending on user demand. 
 
+## Acknowledgment
+
+*This cloud resource is supported by community funds provided by [CloudBank](https://www.cloudbank.org/), which is supported by National Science Foundation award [#1925001](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1925001)*
+
 ## Step 1: request accounts and configuration file
 
 [Click here enter your request](https://forms.gle/2TTrt9nV32pFAHbb9); we will review and contact you by email to provide you with configuration files. The information we ask for is:
