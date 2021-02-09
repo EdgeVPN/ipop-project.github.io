@@ -12,9 +12,6 @@ The EdgeVPN.io team is hosting an XMPP+TURN service in the cloud to help new use
 
 To support ramping-up many new users, the trial accounts are limited to five nodes and expire in a 2-week period; these may change depending on user demand. 
 
-## Acknowledgment
-
-*This cloud resource is supported by community funds provided by [CloudBank](https://www.cloudbank.org/), which is supported by National Science Foundation award [#1925001](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1925001)*
 
 ## Step 1: request accounts and configuration file
 
@@ -72,3 +69,7 @@ By default, the files configure node addresses in the 10.10.100.0/24 subnet, and
 docker exec -it evio001 /bin/bash
 # ping 10.10.100.2
 ```
+
+## Acknowledgment
+
+*This cloud resource is supported by community funds provided by [CloudBank](https://www.cloudbank.org/), which is supported by National Science Foundation award [#1925001](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1925001)*
