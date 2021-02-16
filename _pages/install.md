@@ -23,7 +23,7 @@ Download the latest release from [the GitHub repository](https://github.com/Edge
 
 [Download the package for arm64 Ubuntu Raspberry Pis](https://github.com/EdgeVPNio/evio/releases/download/v20.12.1/evio_20.12.1_arm64.deb)
 
-*Note:* The arm64 package has been tested in Raspberry Pi and Amazon ARM64 instances. We are working on fixing Ubuntu package dependences to support installation on nVidia Jetson devices.
+*Note:* The arm64 package has been tested in Raspberry Pi, Amazon ARM64 instances, and on nVidia Jetson devices. The stock nVidia Jetson Linux kernel, however, does not come with proper dependences installed for Open vSwitch; [follow the instructions to build a custom kernel](/jetson) or contact us if you're intested in improving the process of porting for Jetson devices.
 
 *Note:* We have identified a bug that is triggered by multicast IPv6 packets. While we work to fix the bug for a maintenance release, it is recommended that you disable IPv6 on your nodes:
 
