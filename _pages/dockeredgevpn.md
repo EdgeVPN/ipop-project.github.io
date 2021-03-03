@@ -166,9 +166,9 @@ Now you will run two containers, named evio001 and evio002, mapping the differen
 *NOTE* Evio versions 20.12.0+ have moved the configuration file location to /etc/opt/evio:
 
 ```
-docker run -d -v /home/$USER/evio/config/config-001.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/001:/var/log/evio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:20.12.1 /sbin/init
+docker run -d -v /home/$USER/evio/config/config-001.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/001:/var/log/evio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node /sbin/init
 
-docker run -d -v /home/$USER/evio/config/config-002.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/002:/var/log/evio/ --rm --privileged --name evio002 --network dkrnet edgevpnio/evio-node:20.12.1 /sbin/init
+docker run -d -v /home/$USER/evio/config/config-002.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/002:/var/log/evio/ --rm --privileged --name evio002 --network dkrnet edgevpnio/evio-node /sbin/init
 ```
 
 
