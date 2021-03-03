@@ -6,8 +6,8 @@ header:
   overlay_color: "#303030"
   overlay_image: /assets/images/texture.png
   actions:
-    - label: "<i class='fas fa-download'></i> Latest Release: EdgeVPN.io 20.12.1, Feb. 2021"
-      url: "/releases/"
+    - label: "<i class='fas fa-download'></i> Install Latest Release of EdgeVPN.io"
+      url: "/install/"
 excerpt: "Seamlessly connect edge resources with a scalable virtual Ethernet"
 ---
 

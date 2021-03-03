@@ -10,8 +10,8 @@ main:
     url: /demos/
   - title: "Code"
     url: /code/
-  - title: "Releases"
-    url: /releases/
+  - title: "Install"
+    url: /install/
   - title: "Community"
     url: /community/    
   - title: "Contact"
