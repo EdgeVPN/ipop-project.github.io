@@ -8,43 +8,33 @@ header:
 
 # Install and Run Evio from .deb package
 
-As of version 20.12.0, Evio can run on both amd64 platforms (the majority of commodity edge/cloud resources), as well as on armhf (edge platforms such as Raspberry Pi) with Ubuntu Linux 18.04 and 20.04. 
+As of version 20.12.2, Evio can run on both amd64 platforms (the majority of commodity edge/cloud resources), as well as on armhf and arm64 (edge platforms such as Raspberry Pi) with Ubuntu Linux 18.04 and 20.04. 
 
 *NOTE* For Raspberry Pi users, *we currently only support Ubuntu 20.04 server*. Among other issues, Raspian does more aggressive use of DHCP and, while in principle it should be possible to work around it, we do not have a clean approach to supporting Raspian as of yet. If you would like to try Raspian, it requires disabling DHCP on *all* interfaces, as described at the end of this document.
 
-## Get deb Package
-Download the latest release from [the GitHub repository](https://github.com/EdgeVPNio/evio/releases/).
-
-### Version 20.12.1 maintenance release
-
-[Download the package for x86/amd64 Ubuntu nodes](https://github.com/EdgeVPNio/evio/releases/download/v20.12.1/evio_20.12.1_amd64.deb)
-
-[Download the package for armhf Ubuntu Raspberry Pis](https://github.com/EdgeVPNio/evio/releases/download/v20.12.1/evio_20.12.1_armhf.deb)
-
-[Download the package for arm64 Ubuntu Raspberry Pis](https://github.com/EdgeVPNio/evio/releases/download/v20.12.1/evio_20.12.1_arm64.deb)
+## Install deb Package
 
 *Note:* The arm64 package has been tested in Raspberry Pi, Amazon ARM64 instances, and on nVidia Jetson devices. The stock nVidia Jetson Linux kernel, however, does not come with proper dependences installed for Open vSwitch; [follow the instructions to build a custom kernel](/jetson) or contact us if you're intested in improving the process of porting for Jetson devices.
 
-*Note:* We have identified a bug that is triggered by multicast IPv6 packets. While we work to fix the bug for a maintenance release, it is recommended that you disable IPv6 on your nodes:
-
-```
-sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
-sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
-```
-
-## Install deb Package
-
-### On x86/amd64 Ubuntu:
+Before installing the package, you need to add the evio repository to your node - this step needs only be done once for a host:
 
 ```shell
-sudo apt install -y <path/to>/evio_*.deb
+sudo bash
+# echo "deb [trusted=yes] https://apt.fury.io/evio/ /" > /etc/apt/sources.list.d/fury.list
+# apt update
 ```
 
-### On amrhf or arm64 Raspberry Pi Ubuntu:
+To install the package:
 
 ```shell
-sudo apt-get install libffi-dev
-sudo apt install -y <path/to>/evio_*.deb
+# apt install evio
+```
+
+If the installation fails due to the libffi-dev dependence, you might need to add that manually:
+
+```shell
+# apt-get install libffi-dev
+# apt install evio
 ```
 
 ## Edit Configuration File
@@ -88,4 +78,5 @@ noipv4ll
 denyinterfaces brl101000F ovs-system
 denyinterfaces edgbr101000F ovs-system
 ```
+
 
