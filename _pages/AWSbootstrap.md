@@ -12,14 +12,14 @@ This document describes how you can deploy your own server on the Amazon EC2 clo
 
 The main requirement is that you have an Amazon AWS account, and that you are familiar with launching EC2 instances and configuring security groups. 
 
-You can get started with a baseline EC2 Ubuntu 18.04 instance and use an IP address assigned by AWS on startup. The recommended deployment model is to use an Elastic IP address that has a DNS mapping, but it is not a requirement.
+You can get started with a baseline EC2 Ubuntu 20.04 or 18.04 instance and use an IP address assigned by AWS on startup. The recommended deployment model is to use an Elastic IP address that has a DNS mapping, but it is not a requirement.
 
 
 # Deploy AWS instance
 
 First, log in to the AWS console, and deploy an instance as follows:
 
-* Select the AWS Ubuntu 18.04 AMI
+* Select the AWS Ubuntu 20.04 AMI
 * Suggested configuration: t3.medium with 32GB disk
 * You must configure the following security group policies for inbound traffic:
 
@@ -50,19 +50,20 @@ git clone https://github.com/renatof/evio_config_gen.git
 cd evio_config_gen/
 ```
 
-Edit the setup_evio_bootstrap_server.sh, and customize for your deployment by changing the following two variables with the password you want for your SQL server, and the AWS_PUBLIC_IP:
+You need to customize your deployment by setting the following three environment variables with: the password you want for your SQL server; the AWS_PUBLIC_IP; and a base address for a Docker network which will be created by Docker compose.
+
+The docker compose deployment needs to create a docker network to bind the mysql/openfire containers too. Pick any address space that is available on your host (e.g. 172.16.238/24), but only use the first 3 bytes (separated by two dots, e.g. 172.16.238) when you configure this environment variable. The mysql container will bind to a static IP $EVIODB_DOCKER_NET.2 and openfire will bind to static IP $EVIODB_DOCKER_NET.3 - the coturn container binds to the host network, as it requires a large number of ports.
 
 ```
-# Replace with the password you want for your MySQL server
-MYSQL_ROOT_PASSWORD="my_sql_root_password"
-# Replace with the AWS instance's public IP address
-AWS_SERVER_IP="AWS_SERVER_IP"
+export MYSQL_ROOT_PASSWORD="Enter mysql root password here"
+export AWS_SERVER_IP="Enter IP Here"
+export EVIODB_DOCKER_NET="172.16.238"
 ```
 
 Now run the setup script:
 
 ```
-./setup_evio_bootstrap_server.sh
+bash setup_evio_bootstrap_server_docker-compose.sh
 ```
 
 The script will pause mid-way and ask you to continue Openfire setup in your browser; follow the instructions on the terminal
@@ -78,6 +79,10 @@ docker ps
 # Create XMPP/TURN user accounts, and Evio configuration files
 
 First, change into evio_config_gen, and edit the generate_evio_config_trial.py script.
+
+```
+vi generate_evio_config_trial.py
+```
 
 You need to change two constants in the script (SERVER_ADDRESS, XMPP_DOMAIN), as follows:
 
