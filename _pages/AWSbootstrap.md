@@ -114,6 +114,13 @@ Now you can copy the .json files for each of your Evio nodes, and start them up 
 
 
 
+# To (re) start services
+
+```
+cd ~/evio-config-gen
+docker-compose down
+docker-compose up -d
+```
 
 
 
