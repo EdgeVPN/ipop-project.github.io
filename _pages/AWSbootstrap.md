@@ -81,6 +81,7 @@ docker ps
 First, change into evio_config_gen, and edit the generate_evio_config_trial.py script.
 
 ```
+cd evio_config_gen
 vi generate_evio_config_trial.py
 ```
 
