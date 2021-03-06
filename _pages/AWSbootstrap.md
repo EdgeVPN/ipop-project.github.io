@@ -30,8 +30,11 @@ First, log in to the AWS console, and deploy an instance as follows:
 | Custom UDP Rule | UDP      | 49160 - 59200       | 0.0.0.0/0        | coturn      |
 | SSH             | TCP      | 22                  | 0.0.0.0/0        | SSH         |
 | Custom TCP Rule | TCP      | 5222 - 5223         | 0.0.0.0/0        | XMPP        |
+| Custom TCP Rule | TCP      | 3306                | AWS_PUBLIC_IP/32 | MySQL       |
 | Custom TCP Rule | TCP      | 9090 - 9091         | See note!!       | openfire    |
-|                 | TCP      |                     | AWS_PUBLIC_IP/32 | openfire    |
+|                 | TCP      | 9090 - 9091         | AWS_PUBLIC_IP/32 | openfire    |
+
+Note: make sure you set up all these rules correctly; if UDP port 3478 and range 49160 - 59200 are not open, coturn will not work properly and your network may not do NAT traversal. If the XMPP port is not open, your Evio nodes will not be able to bootstrap. Make sure the MySQL port is *only* open to your instance's public IP; if it's not open properly, neither openfire nor coturn will work.
 
 Note: the last TCP rule for ports 9090-9091 specify which addresses can access the admin interface for Openfire. It is strongly recommended that, instead of opening up to the world (0.0.0.0/0) you provide the list of IP addresses of each admin user who will manage the XMPP server - including your AWS_PUBLIC_IP so you can ssh-tunnel into it.
 
@@ -52,12 +55,9 @@ cd evio_config_gen/
 
 You need to customize your deployment by setting the following three environment variables with: the password you want for your SQL server; the AWS_PUBLIC_IP; and a base address for a Docker network which will be created by Docker compose.
 
-The docker compose deployment needs to create a docker network to bind the mysql/openfire containers too. Pick any address space that is available on your host (e.g. 172.16.238/24), but only use the first 3 bytes (separated by two dots, e.g. 172.16.238) when you configure this environment variable. The mysql container will bind to a static IP $EVIODB_DOCKER_NET.2 and openfire will bind to static IP $EVIODB_DOCKER_NET.3 - the coturn container binds to the host network, as it requires a large number of ports.
-
 ```
 export MYSQL_ROOT_PASSWORD="Enter mysql root password here"
 export AWS_SERVER_IP="Enter IP Here"
-export EVIODB_DOCKER_NET="172.16.238"
 ```
 
 Now run the setup script:
@@ -68,24 +68,17 @@ bash setup_evio_bootstrap_server_docker-compose.sh
 
 The script will pause mid-way and ask you to continue Openfire setup in your browser; follow the instructions on the terminal
 
-*Once the script finishes. Log out of your instance, then ssh back in, so can use Docker as the ubuntu user.* You should now see three containers running, evio-mysql, evio-coturn, and evio-openfire:
-
-```
-exit
-ssh -i your_aws_key.pem ubuntu@AWS_PUBLIC_IP
-docker ps
-```
-
 # Create XMPP/TURN user accounts, and Evio configuration files
 
-First, change into evio_config_gen, and edit the generate_evio_config_trial.py script.
+First, make sure you have AWS_SERVER_IP set as an environment variable as per earlier instrictions, change into evio_config_gen, and edit the generate_evio_config_trial.py script.
 
 ```
+export AWS_SERVER_IP="Enter IP Here"
 cd evio_config_gen
 vi generate_evio_config_trial.py
 ```
 
-You need to change two constants in the script (SERVER_ADDRESS, XMPP_DOMAIN), as follows:
+In generate_evio_config_trial.py you need to change two constants in the script (SERVER_ADDRESS, XMPP_DOMAIN), as follows:
 
 * If you are using a numeric IP address *without DNS configured*, enter the AWS public IP address and set the XMPP_DOMAIN as openfire.local:
 SERVER_ADDRESS: AWS_SERVER_IP
