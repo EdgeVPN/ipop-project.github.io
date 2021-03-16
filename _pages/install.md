@@ -40,9 +40,13 @@ If the installation fails due to the libffi-dev dependence, you might need to ad
 ## Edit Configuration File
 After installation, but before starting, configure your node by editing `/etc/opt/evio/config.json`. The easiest way to get started with a working configuration is to [request a trial account](/trial). You can also use [the template from this page and add XMPP credentials, setting the IP address, and applying other configurations as needed](/configbasics) 
 
-## Run Service
+## Run Service and disable multicast
+
+Replace appbrXXXXX with the name of your Evio bridge in the command below to disable multicast:
+
 ```shell
 sudo systemctl start evio
+sudo ip link set appbrXXXXX multicast off
 ``` 
 
 Additionally, use `systemctl` to `start`/`stop`/`restart`/`status` `evio`.
