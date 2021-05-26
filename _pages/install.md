@@ -20,7 +20,7 @@ Before installing the package, you need to add the evio repository to your node 
 
 ```shell
 sudo bash
-# echo "deb [trusted=yes] https://apt.fury.io/evio/ /" > /etc/apt/sources.list.d/fury.list
+# echo "deb [trusted=yes] https://apt.fury.io/evio/ * *" > /etc/apt/sources.list.d/fury.list
 # apt update
 ```
 
