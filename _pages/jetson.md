@@ -62,7 +62,7 @@ mkdir -p $TEGRA_KERNEL_OUT
 make ARCH=arm64 O=$TEGRA_KERNEL_OUT tegra_defconfig
 ```
 
-### Edit .config to enable Open vSwitch modules
+### Edit .config to enable Open vSwitch (and k8s) needed modules
 
 Now, you need to edit the .config file (with kernel build configuration parameters) to add Open vSwitch and GRE support as modules
 
@@ -78,6 +78,7 @@ CONFIG_NET_IPGRE_DEMUX=m
 CONFIG_OPENVSWITCH=m
 CONFIG_OPENVSWITCH_GRE=m
 CONFIG_OPENVSWITCH_VXLAN=m
+CONFIG_IP_VS_WRR=m
 ```
 
 ### Build the kernel
