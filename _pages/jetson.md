@@ -37,7 +37,7 @@ You can [login with your nVidia dev account and browse the downloads page](https
 Copy the downloaded archive to your home directory on the nano, and expand it with:
 
 ```
-tar xf Tegra210_Linux_*.tbz2
+tar xf Jetson-210_Linux_*.tbz2
 ```
 
 ### Sync gode with git repo
@@ -47,7 +47,7 @@ cd Linux_for_Tegra
 ./source_sync.sh
 ```
 
-When prompted, enter the [git tag you want sync to](https://nv-tegra.nvidia.com/gitweb/?p=linux-4.9.git), e.g. tegra-l4t-r32.5
+When prompted, enter the [git tag you want sync to](https://nv-tegra.nvidia.com/gitweb/?p=linux-4.9.git), e.g. tegra-l4t-r32.5.1
 
 You may be asked multiple times.
 
