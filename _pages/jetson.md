@@ -114,7 +114,7 @@ pushd ~/Linux_for_Tegra/rootfs
 tar --owner root --group root -cjf kernel-ovs-modules.tbz2 lib/modules
 popd
 pushd /
-tar -xf ~/Linux_for_Tegra/rootfs/kernel-ovs-modules.tbz2
+sudo tar -xf ~/Linux_for_Tegra/rootfs/kernel-ovs-modules.tbz2
 popd
 ```
 
@@ -153,3 +153,14 @@ LABEL backup
     INITRD /boot/initrd
     APPEND ${cbootargs} quiet root=/dev/mmcblk0p1 rw rootwait rootfstype=ext4 console=ttyS0,115200n8 console=tty0 fbcon=map:0 net.ifnames=0
 ```
+
+### Create an archive to distribute to other devices
+
+If you'd like to install the custom kernel on other devices, start by creating an archive jetson-custom-kernel-ovs.tgz:
+
+```
+cd /
+tar -czf jetson-custom-kernel-ovs.tgz lib/modules/4.9.201+/ boot/Image-ovs boot/extlinux/extlinux.conf
+```
+
+You can then copy to other nodes, and untar from the root directory
