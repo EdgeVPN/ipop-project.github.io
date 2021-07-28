@@ -70,18 +70,30 @@ Now, you need to edit the .config file (with kernel build configuration paramete
 vi $TEGRA_KERNEL_OUT/.config 
 ```
 
-Uncomment/add the following config entries:
+Uncomment configuration entries to set the following values (note: commented lines are kept below to guide where in the file the changes are located):
+
+Configurations needed by OpenVswitch and Evio:
 
 ```
+# CONFIG_NET_IPIP is not set
 CONFIG_NET_IPGRE=m
 CONFIG_NET_IPGRE_DEMUX=m
-CONFIG_OPENVSWITCH=m
-CONFIG_OPENVSWITCH_GRE=m
-CONFIG_OPENVSWITCH_VXLAN=m
 ```
 
-If you plan to also use Kubernetes, uncomment/add the following entries as well:
 ```
+# CONFIG_BATMAN_ADV is not set
+CONFIG_OPENVSWITCH=m 
+CONFIG_OPENVSWITCH_GRE=m 
+CONFIG_OPENVSWITCH_VXLAN=m 
+```
+
+Configurations needed by Kubernetes, if you plan to use it:
+
+```
+#
+# IPVS scheduler
+#
+CONFIG_IP_VS_RR=m
 CONFIG_IP_VS_RR=m
 CONFIG_IP_VS_WRR=m
 CONFIG_IP_VS_LC=m
@@ -95,6 +107,15 @@ CONFIG_IP_VS_SH=m
 CONFIG_IP_VS_SED=m
 CONFIG_IP_VS_NQ=m
 ```
+
+```
+# CONFIG_NETFILTER_XT_TARGET_NETMAP is not set
+CONFIG_NETFILTER_XT_TARGET_NFLOG=m
+CONFIG_NETFILTER_XT_TARGET_NFQUEUE=m
+CONFIG_NETFILTER_XT_TARGET_NOTRACK=m
+CONFIG_NETFILTER_XT_TARGET_RATEEST=m
+```
+
 
 ### Build the kernel
 
