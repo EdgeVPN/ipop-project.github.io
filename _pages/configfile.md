@@ -16,7 +16,7 @@ This module is used to configure the overall controller framework. It configures
 
 * _Model_ specifies a mnemonic to describe customized IPOP controllers. You can develop and add your own modules, or remove or replace existing modules. For the vast majority of uses, set it to "Default" 
 
-* _Overlays_ specifies the overlay ID, a 28-bit number encoded in hexadecimal format. *Note: currently, EdgeVPN.io only supports a single overlay*
+* _Overlays_ specifies the overlay ID, the 12-character identifier for your overlay (e.g. Overlay_12345) 
 
 * _NodeId_ specifies the node's unique ID. NodeId is a 128-bit number also in hexadecimal format. You may specify a unique ID, or, if left blank, the framework will generate a random ID. The example below shows an overlay with ID "101000F" and NodeID "a100001feb6040628e5fb7e70b04f001"
 
@@ -92,7 +92,7 @@ This model specifies how to connect to XMPP services to establish a signaling ch
 
 * _CacheExpiry_ specifies the minimum duration (in seconds) that an entry remains in the NodeID -> JID mapping cache
 
-* _Overlays_ specifies each overlay to be configured. This needs to match overlays described in the CFx module (in the example below, "101000F")
+* _Overlays_ specifies each overlay to be configured. This needs to match overlays described in the CFx module 
 
 * _HostAddress_ specifies the IP address or host name of the XMPP server
 
@@ -106,22 +106,7 @@ This model specifies how to connect to XMPP services to establish a signaling ch
 
 * _Password_ specifies the user's password
 
-Example:
-
-```
-  "Signal": {
-    "Enabled": true,
-    "Overlays": {
-      "101000F": {
-        "HostAddress": "A.B.C.D",
-        "Port": "5222",
-        "Username": "user@xmppsite.com",
-        "Password": "password",
-        "AuthenticationMethod": "PASSWORD"
-      }
-    }
-  },
-```
+An example can be found in [the "basic configuration" documentation](/configbasics)
 
 ### For certificate-based authentication: _AuthenticationMethod_ is x509
 
@@ -133,29 +118,13 @@ Example:
 
 **Note: the port typically used for x509-based auth is 5223, not 5222**
 
-Example:
-
-```
-  "Signal": {
-    "Enabled": true,
-    "Overlays": {
-      "101000F": {
-        "HostAddress": "A.B.C.D",
-        "Port": "5223",
-        "AuthenticationMethod": "x509",
-        "CertDirectory": "/home/user/edgevpn/cacerts/",
-        "CertFile": "edgevpn.crt",
-        "KeyFile": "edgevpn.key"
-      }
-    }
-  },
-```
+An example can be found in [the "basic configuration" documentation](/configbasics)
 
 ## Topology module
 
 Module that defines and enforces the overlay's topology. Currently, EdgeVPN.io supports a Symphony-based structured peer-to-peer topology for its tunnels
 
-* _Overlays_ specifies a configuration for each overlay being managed by this controller. Each overlay is specified by its UUID - a hexadecimal value matching one in the CFx Overlays list (see above). *Note*: currently, the system supports only a single overlay. 
+* _Overlays_ specifies a configuration for each overlay being managed by this controller as a 12-character identifier for your overlay (e.g. Overlay_12345) 
 
 * _Name_ a mnemonic string to name the overlay
 
@@ -171,26 +140,8 @@ Module that defines and enforces the overlay's topology. Currently, EdgeVPN.io s
 
 * _MaxLongDistEdges_ specifies the maximum number of outgoing long distance Symphony edges to initiate
 
-* _MaxConcurrentEdgeSetup_ specifies the maximum number of edges to be created concurrently. This can help prevent a "stampede" effect when joining an existing large overlay
+* _Role_ specifies whether this one acts as a full virtual switch node in an overlay. Currently, only the *Switch* role is supported. In *Switch* role, a node will perform switching operations and accept incoming connection requests to create edges.
 
-* _Role_ specifies whether this one acts as a full virtual switch node in an overlay (*Switch*), or as a *Leaf* node that joins the overlay by connecting to a Switch node. In *Switch* role, a node will perform switching operations and accept incoming connection requests to create edges. In *Leaf* role, a node is a client/edge device that must connect to a Switch node. *Leaf* nodes reject any incoming requests for an edge.
-
-Example:
-
-```
-  "Topology": {
-    "PeerDiscoveryCoalesce": 4,
-    "Overlays": {
-      "101000F": {
-        "Name": "SymphonyRing",
-        "Description": "Scalable Symphony Ring Overlay for Bounded Flooding.",
-        "MaxSuccessors": 2,
-        "MaxConcurrentEdgeSetup": 5,
-        "Role": "Switch"
-      }
-    }
-  },
-```
 
 ## LinkManager module
 
@@ -206,38 +157,13 @@ _User_ specifies the TURN user name
 
 _Password_ specifies a corresponding TURN password for _User_
 
-* _Overlays_ specifies a configuration for each overlay being managed by this controller, starting with the UUID (a hexadecimal value matching one in the CFx Overlays list (see above) *Note*: currently, the system only supports a single overlay.
+* _Overlays_ specifies a configuration for each overlay being managed by this controller as a 12-character identifier for your overlay (e.g. Overlay_12345)
 
 * _Type_ currently, the only value allowed is TUNNEL
 
-* _TapName_ specifies the prefix used for creating the tap virtual network interface devices. Each tunnel created by the link manager is bound to a tap device of the operating system; the full name of the tap device consists of this prefix, appended with the first 7 characters of the link ID (e.g. *tnl-1234567*)
+* _TapNamePrefix_ specifies the prefix used for creating the tap virtual network interface devices. Each tunnel created by the link manager is bound to a tap device of the operating system; the full name of the tap device consists of this prefix, appended with the first 12 characters of the link ID (e.g. *tnl1234567890AB*)
 
 * _IgnoredNetInterfaces_ specifies a list of TAP device names that should not be used for tunneling. No tunnel endpoints points to these network interfaces will be generated
-
-```
-  "LinkManager": {
-    "Dependencies": [
-      "Logger",
-      "TincanInterface",
-      "Signal"
-    ],
-    "Stun": [
-      "stun.l.google.com:19302",
-      "stun1.l.google.com:19302"
-    ],
-    "Turn": [{
-      "Address": "w2.xirsys.com:80",
-      "User": "your-user-id-string",
-      "Password": "your-password-string"
-     }],
-    "Overlays": {
-      "101000F": {
-        "Type": "TUNNEL",
-        "TapName": "tnl-"
-      }
-    }
-  },
-```
 
 ## OverlayVisualizer module
 
@@ -256,7 +182,7 @@ This module configures information for an (optional) overlay visualizer service
 ```
   "OverlayVisualizer": {
     "Enabled": false,
-    "TimerInterval": 25,
+    "TimerInterval": 30,
     "WebServiceAddress": "192.168.0.42:5000",
     "GeoCoordinate": "14.073791,100.606308",
     "NodeName": "nd-001"
@@ -273,7 +199,7 @@ This module manages the network bridge interaction with the tap devices
 
 Under BoundedFlood, you configure parameters related to the implementation of broadcast/multicast over the P2P topology.
 
-* _OverlayID_ is the 7-digit hexadecimal identifier for your overlay (e.g. 101000F)
+* _OverlayID_ is the 12-character identifier for your overlay (e.g. Overlay_12345)
 
 * _LogDir_ is the directory where bounded flood logs go to (typically the same as the other logs, e.g. /var/log/edge-vpn/)
 
@@ -307,7 +233,7 @@ Under BoundedFlood, you configure parameters related to the implementation of br
 
 ### Overlays
 
-* _Overlays_ specifies a configuration for each overlay being managed by this controller, starting with the UUID (a hexadecimal value matching one in the CFx Overlays list (see above). It holds configurations for the network interface device (NetDevice) and the SDN controller (SDNController) *Note*: currently, the system only supports a single overlay.
+* _Overlays_ specifies a configuration for each overlay being managed by this controller, the 12-character identifier for your overlay (e.g. Overlay_12345). It holds configurations for the network interface device (NetDevice) and the SDN controller (SDNController) 
 
 #### NetDevice
 
@@ -349,57 +275,10 @@ This section configures the SDN controller endpoint
 
 * _Port_ configures the port where the SDN controller listens to; set this to 6333
 
-Example:
+An example can be found in [the "basic configuration" documentation](/configbasics)
 
-```
-  "BridgeController": {
-    "Dependencies": [
-      "Logger",
-      "LinkManager"
-    ],
-    "BoundedFlood": {
-      "OverlayId": "101000F",
-      "LogDir": "/var/log/edge-vpn/",
-      "LogFilename": "bf.log",
-      "LogLevel": "INFO",
-      "BridgeName": "edgbr",
-      "DemandThreshold": "100M",
-      "FlowIdleTimeout": 60,
-      "FlowHardTimeout": 60,
-      "MulticastBroadcastInterval": 60,
-      "MaxBytes": 10000000,
-      "BackupCount": 0,
-      "ProxyListenAddress": "",
-      "ProxyListenPort": 5802,
-      "MonitorInterval": 60,
-      "MaxOnDemandEdges": 0
-    },
-    "Overlays": {
-      "101000F": {
-        "NetDevice": {
-          "AutoDelete": true,
-          "Type": "OVS",
-          "SwitchProtocol": "BF",
-          "NamePrefix": "edgbr",
-          "MTU": 1410,
-          "AppBridge": {
-            "AutoDelete": true,
-            "Type": "OVS",
-            "NamePrefix": "brl",
-            "IP4": "10.10.10.21",
-            "PrefixLen": 16,
-            "MTU": 1410
-          }
-        },
-        "SDNController": {
-          "ConnectionType": "tcp",
-          "HostName": "127.0.0.1",
-          "Port": "6633"
-        }
-      }
-    }
-  }
-```
+
+
 
 ## UsageReport module
 
