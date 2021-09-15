@@ -18,27 +18,35 @@ A simple way to get started with your first configuration is to [request an Edge
 
 Before jumping into details, here is a configuration file template that is sufficient to get started with EdgeVPN.io - just replace XMPP _HostAddress_, _Username_ and _Password_ in the _Signal_ module, and _IP4_ and _NetworkAddress_ in the _BridgeController_ module: 
 
+
 ```
 {
   "CFx": {
+    "Model": "Default",
     "Overlays": [ "MyTest" ]
   },
   "Logger": {
-    "LogLevel": "DEBUG",
-    "Directory": "/var/log/evio/"
+    "LogLevel": "INFO",
+    "Device": "File",
+    "Directory": "/var/log/evio/",
+    "CtrlLogFileName": "ctrl.log",
+    "TincanLogFileName": "tincan_log",
+    "MaxFileSize": 10000000,
+    "MaxArchives": 2
   },
   "Signal": {
     "Overlays": {
       "MyTest": {
         "HostAddress": "A.B.C.D",
+        "AuthenticationMethod": "PASSWORD",
         "Port": "5222",
         "Username": "test1@openfire.local",
-        "Password": "password_test1",
-        "AuthenticationMethod": "PASSWORD"
+        "Password": "password_test1"
       }
     }
   },
   "Topology": {
+    "PeerDiscoveryCoalesce": 1,
     "Overlays": {
       "MyTest": {
         "MaxSuccessors": 2,
@@ -55,32 +63,28 @@ Before jumping into details, here is a configuration file template that is suffi
     "Overlays": {
       "MyTest": {
         "Type": "TUNNEL",
-        "TapName": "tnl-"
+        "TapNamePrefix": "tnl"
       }
     }
   },
-  "UsageReport": {
-    "Enabled": true,
-    "TimerInterval": 3600,
-    "WebService": "https://qdscz6pg37.execute-api.us-west-2.amazonaws.com/default/EvioUsageReport"
-  },
   "BridgeController": {
     "BoundedFlood": {
-      "OverlayId": "MyTest",
       "LogDir": "/var/log/evio/",
       "LogFilename": "bf.log",
-      "LogLevel": "DEBUG",
-      "BridgeName": "evio",
-      "DemandThreshold": "100M",
-      "FlowIdleTimeout": 60,
-      "FlowHardTimeout": 60,
-      "MulticastBroadcastInterval": 60,
+      "LogLevel": "INFO",
       "MaxBytes": 10000000,
-      "BackupCount": 2,
+      "BackupCount": 10,
+      "TrafficAnalysisInterval": 10,
       "ProxyListenAddress": "",
       "ProxyListenPort": 5802,
-      "MonitorInterval": 60,
-      "MaxOnDemandEdges": 0
+      "Overlays": {
+        "MyTest": {
+          "DemandThreshold": "10M",
+          "FlowIdleTimeout": 60,
+          "FlowHardTimeout": 60,
+          "MaxOnDemandEdges": 3
+        }
+      }
     },
     "Overlays": {
       "MyTest": {
@@ -88,15 +92,16 @@ Before jumping into details, here is a configuration file template that is suffi
           "AutoDelete": true,
           "Type": "OVS",
           "SwitchProtocol": "BF",
-          "NamePrefix": "evio",
+          "NamePrefix": "evi",
           "MTU": 1410,
           "AppBridge": {
             "AutoDelete": true,
             "Type": "OVS",
-            "NamePrefix": "appbr",
+            "NamePrefix": "app",
+            "NetworkAddress": "10.10.100.0/24",
+            "MTU": 1370,
             "IP4": "10.10.100.1",
-            "PrefixLen": 24,
-            "MTU": 1410
+            "PrefixLen": 24
           }
         },
         "SDNController": {
@@ -106,9 +111,15 @@ Before jumping into details, here is a configuration file template that is suffi
         }
       }
     }
+  },
+  "UsageReport": {
+    "Enabled": true,
+    "TimerInterval": 3600,
+    "WebService": "https://qdscz6pg37.execute-api.us-west-2.amazonaws.com/default/EvioUsageReport"
   }
 }
 ```
+
 
 # Configure your XMPP server endpoint and user credentials
 
@@ -135,7 +146,7 @@ Certificate-based authentication requires additional steps to [create a CA, sign
   "Signal": {
     "Overlays": {
       "MyTest": {
-        "HostAddress": "A.B.C.B",
+        "HostAddress": "A.B.C.D",
         "Port": "5223",
         "AuthenticationMethod": "x509",
         "CertDirectory": "/home/user/edgevpn/cacerts/",
@@ -159,9 +170,9 @@ An example of the console output of _ip address_ of how such a deployment would 
 * lo is the loopback interface
 * eth0 is the main network interface
 * ovs-system is the Open vSwitch
-* evioMyTest is the EdgeVPN.io bridge (the name is a concatenation of the prefix and overlay ID from the configuration)
-* appbrMyTest is the bridge configured with an IP address
-* tnl-* are the tap devices from which EdgeVPN.io packets are picked/injected from/into the virtual network
+* eviMyTest is the EdgeVPN.io bridge (the name is a concatenation of the prefix and overlay ID from the configuration)
+* appMyTest is the bridge configured with an IP address
+* tnl* are the tap devices from which EdgeVPN.io packets are picked/injected from/into the virtual network
 
 ```
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -170,15 +181,15 @@ An example of the console output of _ip address_ of how such a deployment would 
        valid_lft forever preferred_lft forever
 2: ovs-system: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
     link/ether a2:a0:50:bf:79:d0 brd ff:ff:ff:ff:ff:ff
-3: evioMyTest: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1410 qdisc noqueue state UNKNOWN group default qlen 1000
+3: eviMyTest: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1410 qdisc noqueue state UNKNOWN group default qlen 1000
     link/ether d2:35:42:50:e9:42 brd ff:ff:ff:ff:ff:ff
-4: appbrMyTest: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1410 qdisc noqueue state UNKNOWN group default qlen 1000
+4: appMyTest: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1410 qdisc noqueue state UNKNOWN group default qlen 1000
     link/ether de:40:a2:aa:aa:4a brd ff:ff:ff:ff:ff:ff
     inet 10.10.10.1/16 scope global brl101000F
        valid_lft forever preferred_lft forever
-5: tnl-a100001: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1410 qdisc fq_codel master ovs-system state UNKNOWN group default qlen 1000
+5: tnla100011fffff: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1410 qdisc fq_codel master ovs-system state UNKNOWN group default qlen 1000
     link/ether b6:39:18:2e:60:87 brd ff:ff:ff:ff:ff:ff
-8: tnl-a100008: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1410 qdisc fq_codel master ovs-system state UNKNOWN group default qlen 1000
+8: tnla100012fffff: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1410 qdisc fq_codel master ovs-system state UNKNOWN group default qlen 1000
     link/ether 9e:68:ea:74:8a:ec brd ff:ff:ff:ff:ff:ff
 22: eth0@if23: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
     link/ether 02:42:ac:12:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
@@ -186,26 +197,27 @@ An example of the console output of _ip address_ of how such a deployment would 
        valid_lft forever preferred_lft forever
 ```
 
-For this deployment, you need to configure the IP4 address of the node, and PrefixLen to match the subnet your virtual network uses. In the example below, we configure a 24-bit subnet, and IP4 address 10.10.10.1 for Linux bridge _evio_. Additional parameters under "BoundedFlood" configure various timeouts used by the node - please refer to the complete configuration documentation for more information.
+For this deployment, you need to configure the IP4 address of the node, and PrefixLen to match the subnet your virtual network uses. In the example below, we configure a 24-bit subnet, and IP4 address 10.10.100.1 for Linux bridge _app_. Additional parameters under "BoundedFlood" configure various timeouts used by the node - please refer to the complete configuration documentation for more information.
 
 ```
   "BridgeController": {
     "BoundedFlood": {
-      "OverlayId": "MyTest",
       "LogDir": "/var/log/evio/",
       "LogFilename": "bf.log",
       "LogLevel": "INFO",
-      "BridgeName": "evio",
-      "DemandThreshold": "100M",
-      "FlowIdleTimeout": 60,
-      "FlowHardTimeout": 60,
-      "MulticastBroadcastInterval": 60,
       "MaxBytes": 10000000,
-      "BackupCount": 2,
+      "BackupCount": 10,
+      "TrafficAnalysisInterval": 10,
       "ProxyListenAddress": "",
       "ProxyListenPort": 5802,
-      "MonitorInterval": 60,
-      "MaxOnDemandEdges": 0
+      "Overlays": {
+        "MyTest": {
+          "DemandThreshold": "10M",
+          "FlowIdleTimeout": 60,
+          "FlowHardTimeout": 60,
+          "MaxOnDemandEdges": 3
+        }
+      }
     },
     "Overlays": {
       "MyTest": {
@@ -213,15 +225,16 @@ For this deployment, you need to configure the IP4 address of the node, and Pref
           "AutoDelete": true,
           "Type": "OVS",
           "SwitchProtocol": "BF",
-          "NamePrefix": "evio",
+          "NamePrefix": "evi",
           "MTU": 1410,
           "AppBridge": {
             "AutoDelete": true,
             "Type": "OVS",
-            "NamePrefix": "appbr",
-            "IP4": "10.10.10.1",
-            "PrefixLen": 24,
-            "MTU": 1410
+            "NamePrefix": "app",
+            "NetworkAddress": "10.10.100.0/24",
+            "MTU": 1370,
+            "IP4": "10.10.100.1",
+            "PrefixLen": 24
           }
         },
         "SDNController": {
@@ -231,50 +244,9 @@ For this deployment, you need to configure the IP4 address of the node, and Pref
         }
       }
     }
-  }
+  },
 ```
-
-## Configuring deployment without the patch bridge
-
-In your deployment, you may be able to configure EdgeVPN.io to expose an OVS virtual switch without an IP address to your leaf devices. For this configuration, leave out the _AppBridge_ dictionary in your configuration file. Here's how the configuration file above would look like if you don't need the patch bridge:
-
-```
-  "BridgeController": {
-    "BoundedFlood": {
-      "OverlayId": "MyTest",
-      "LogDir": "/var/log/evio/",
-      "LogFilename": "bf.log",
-      "LogLevel": "INFO",
-      "BridgeName": "evio",
-      "DemandThreshold": "100M",
-      "FlowIdleTimeout": 60,
-      "FlowHardTimeout": 60,
-      "MulticastBroadcastInterval": 60,
-      "MaxBytes": 10000000,
-      "BackupCount": 2,
-      "ProxyListenAddress": "",
-      "ProxyListenPort": 5802,
-      "MonitorInterval": 60,
-      "MaxOnDemandEdges": 0
-    },
-    "Overlays": {
-      "MyTest": {
-        "NetDevice": {
-          "AutoDelete": true,
-          "Type": "OVS",
-          "SwitchProtocol": "BF",
-          "NamePrefix": "evio",
-          "MTU": 1410,
-        },
-        "SDNController": {
-          "ConnectionType": "tcp",
-          "HostName": "127.0.0.1",
-          "Port": "6633"
-        }
-      }
-    }
-  }
-```
+  
 
 # Configure NAT traversal
 
@@ -293,7 +265,7 @@ The setup in the configuration file is simple. An example with STUN only, config
     "Overlays": {
       "MyTest": {
         "Type": "TUNNEL",
-        "TapName": "tnl-"
+        "TapNamePrefix": "tnl"
       }
     }
   },
@@ -315,7 +287,7 @@ An example with a TURN server added (substitute _Address_, _User_ and _Password_
     "Overlays": {
       "MyTest": {
         "Type": "TUNNEL",
-        "TapName": "tnl-"
+        "TapNamePrefix": "tnl"
       }
     }
   },
@@ -323,17 +295,8 @@ An example with a TURN server added (substitute _Address_, _User_ and _Password_
 
 # Configure P2P Topology
 
-The structured peer-to-peer topology used in your deployment can be configured under "Topology", The key parameters you may modify are MaxSuccessors (maximum number of immediate successors a node has in the ring) and MaxOnDemandEdges (maximum number of on-demand edges that can be created in response to large flows measured between two nodes).
+The structured peer-to-peer topology used in your deployment can be configured under "Topology", The key parameters you may modify are MaxSuccessors (maximum number of immediate successors a node has in the ring) and MaxOnDemandEdges (maximum number of on-demand edges that can be created in response to large flows measured between two nodes). 
 
-```
-  "Topology": {
-    "Overlays": {
-      "MyTest": {
-        "MaxSuccessors": 2,
-        "MaxOnDemandEdges": 3,
-        "Role": "Switch"
-      }
-    }
-  },
-```
+_Note_ MaxOnDemandEdges needs to match in both Topology and BridgeController-BoundedFlood. Setting the value to 0 disables on-demand
+
 
