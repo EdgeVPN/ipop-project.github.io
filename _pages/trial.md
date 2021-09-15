@@ -58,7 +58,7 @@ If you already have Docker installed, you just need to create a Docker network, 
 You can start the container and bind to the dkrnet network as follows. Alternatively, you can replace _dkrnet_ with _host_ below to use Docker's host networking - if you only run a single container in your host.
 
 ```
-docker run -d -v /path_to/config-001.json:/etc/opt/evio/config.json -v /path_to/logs/001:/var/log/edge-vpnio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:20.12.2 /sbin/init
+docker run -d -v /path_to/config-001.json:/etc/opt/evio/config.json -v /path_to/logs/001:/var/log/edge-vpnio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:21.9.0 /sbin/init
 ```
 
 ## Step 3: Test it out
