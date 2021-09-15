@@ -191,15 +191,54 @@ This module configures information for an (optional) overlay visualizer service
 
 ## BridgeController module
 
-This module manages the network bridge interaction with the tap devices
+This module manages the network bridge device, its interaction with TAP devices, and its switching protocol.
 
-* _Dependencies_ lists controller modules the BridgeController depends on. Currently, it depends on "Logger" and "LinkManager"
+### Overlays
+
+* _Overlays_ specifies a configuration for each overlay being managed by this controller, the 12-character identifier for your overlay (e.g. Overlay_12345). It holds configurations for the network interface device (NetDevice) and the SDN controller (SDNController).
+
+#### NetDevice
+This is the Evio bridge that is managed by the BoundedFlood OpenFlow controller.
+
+* _AutoDelete_ specifies whether to remove the bridge device that was specified when the controller shuts down. Possible values: True, False. Setting this to False is useful if you want the software to attach to an existing bridge device.
+
+* _Type_ specifies the type of network bridge to instantiate. Supported values are OVS (for Open vSwitch), VNIC (virtual NIC), and LXBR (Linux bridge). For most use cases, OVS is used - a node connected in Switch role structured overlay requires OVS. You should only use VNIC if Topology’s Role is set to _Leaf_. You should onlye use LXBR when you have an overlay that is "hardwired" with _ManualTopology_ (see Topology module section).
+
+* _SwitchProtocol_ Use BF for Bounded Flood (default for Type OVS), STP for Spanning Tree Protocol (default for Type LXBR).
+
+* _NamePrefix_ is the 3 character prefix used to name the primary bridge/switch; the prefix is appended with the Overlay ID string.
+
+* _MTU_ specifies the maximum transmission unit size to be applied to the evio bridge.
+
+#### AppBridge
+
+This section configures a secondary "patch through" application bridge that is connected to the primary bridge in a configuration where the node runs an endpoint with its own IP address.
+
+* _AutoDelete_ specifies whether to remove the bridge device that was specified when the controller shuts down. Possible values: True, False (default).
+
+* _NamePrefix_ is the prefix used to name this bridge; the prefix is appended with the Overlay ID string.
+
+* _IP4_ specifies the IPv4 address to assign to the bridge. This is an optional parameter; if your deployment does not require assigning an IP configuration to the bridge, it can be omitted.
+
+* _PrefixLen_ specifies the network prefix length to apply to the bridge. Required if you specify IP4.
+
+* _MTU_ specifies the maximum transmission unit size to be applied to the app bridge. Optional parameter; by default, it is set to 1410.
+
+#### SDNController
+
+This section configures the SDN controller endpoint.
+
+* _ConnectionType_ configures the transport used; set this to tcp.
+
+* _HostName_ configures the host where the SDN controller runs; set this to 127.0.0.1 (localhost)
+
+* _Port_ configures the port where the SDN controller listens to; set this to 6333
+
+An example can be found in [the "basic configuration" documentation](/configbasics)
 
 ### BoundedFlood
 
-Under BoundedFlood, you configure parameters related to the implementation of broadcast/multicast over the P2P topology.
-
-* _OverlayID_ is the 12-character identifier for your overlay (e.g. Overlay_12345)
+BoundedFlood is the OpenFlow controller provided by EdgeVPN. It provides the switching functionaly for overlay networks built on P2P topology.
 
 * _LogDir_ is the directory where bounded flood logs go to (typically the same as the other logs, e.g. /var/log/edge-vpn/)
 
@@ -211,74 +250,15 @@ Under BoundedFlood, you configure parameters related to the implementation of br
 
 * _BackupCount_ number of archives for the log file
 
-* _BridgeName_ specifies a mnemonic used for naming the bridge instance.
+* _TrafficAnalysisInterval_ the interval in seconds to run the traffic analyzer for on-demand links.
 
-* _DemandThreshold_ specifies the amount of data transferred over a link that triggers the creation of an on-demand link (e.g. 100M for 100MBytes). Units supported included: K (Kilo), M (Mega) and G (Giga)
+#### Overlays
 
-* _MonitorInterval_ Interval in which on-demand thresholds are monitored for 
+* _Overlays_ specifies a configuration for each overlay being managed by this controller.
 
-* _MaxOnDemandEdges_ maximum number of on-demand edges that this node may request; setting this to 0 disables creation of on-demand links
+* _MaxOnDemandEdges_ maximum number of on-demand edges that this node may request; setting this to 0 disables creation of on-demand links.
 
-* _FlowIdleTimeout_ if an SDN flow rule is not being used (no packet maches the rule) by the SDN switch within this interval, it is removed
-
-* _FlowHardTimeout_ a hard timeout for removing SDN flow rules (regardless of whether they are used or not)
-
-* _MulticastBroadcastInterval_ interval in which a multicast sender will send broadcasts to program multicast trees
-
-* _ProxyListenAddress_ listening address of the bridge module in the controller - the SDN controller uses this to send requests to the EdgeVPN.io overlay controller
-
-* _ProxyListenPort_ listening TCP port of the bridge module in the controller - the SDN controller uses this to send requests to the EdgeVPN overlay controller
-
-
-
-### Overlays
-
-* _Overlays_ specifies a configuration for each overlay being managed by this controller, the 12-character identifier for your overlay (e.g. Overlay_12345). It holds configurations for the network interface device (NetDevice) and the SDN controller (SDNController) 
-
-#### NetDevice
-
-* _AutoDelete_ specifies whether to remove the bridge device that was specified when the controller shuts down. Possible values: True, False. Setting this to False is useful if you want the software to attach to an existing bridge device.
-
-* _Type_ specifies the type of network bridge to instantiate. Supported values are OVS (for Open vSwitch), VNIC (virtual NIC), and LXBR (Linux bridge). For most use cases, OVS is used - a node connected in Switch role structured overlay requires OVS. You should only use VNIC if Topology’s Role is set to _Leaf_. You should onlye use LXBR when you have an overlay that is "hardwired" with _ManualTopology_ (see Topology module section)
-
-* _SwitchProtocol_ Use BF for Bounded Flood (default for Type OVS), STP for Spanning Tree Protocol (default for Type LXBR)
-
-* _NamePrefix_ is the prefix used to name the primary bridge/switch; the prefix is appended with the Overlay ID string
-
-* _IP4_ specifies the IPv4 address to assign to the bridge. This is an optional parameter; if your deployment does not require assigning an IP configuration to the bridge, it can be omitted
-
-* _PrefixLen_ specifies the network prefix length to apply to the bridge. (Optional parameter)
-
-* _MTU_ specifies the maximum transmission unit size to be applied to the bridge
-
-#### AppBridge
-
-This optional section configures a secondary "patch through" bridge that is connected to the primary bridge in a configuration where the node runs an endpoint with its own IP address
-
-* _AutoDelete_ specifies whether to remove the bridge device that was specified when the controller shuts down. Possible values: True, False (default)
-
-* _NamePrefix_ is the prefix used to name this bridge; the prefix is appended with the Overlay ID string
-
-* _IP4_ specifies the IPv4 address to assign to the bridge. This is an optional parameter; if your deployment does not require assigning an IP configuration to the bridge, it can be omitted
-
-* _PrefixLen_ specifies the network prefix length to apply to the bridge. (Optional parameter)
-
-* _MTU_ specifies the maximum transmission unit size to be applied to the bridge. Optional parameter; by default, it is set to 1410
-
-#### SDNController
-
-This section configures the SDN controller endpoint
-
-* _ConnectionType_ configures the transport used; set this to tcp
-
-* _HostName_ configures the host where the SDN controller runs; set this to 127.0.0.1 (localhost)
-
-* _Port_ configures the port where the SDN controller listens to; set this to 6333
-
-An example can be found in [the "basic configuration" documentation](/configbasics)
-
-
-
+* _DemandThreshold_ specifies the amount of data transferred over a link that triggers the creation of an on-demand link (e.g. 100M for 100MBytes). Units supported included: K (Kilo), M (Mega) and G (Giga).
 
 ## UsageReport module
 
