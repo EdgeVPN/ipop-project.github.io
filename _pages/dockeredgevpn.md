@@ -58,104 +58,8 @@ mkdir logs/002
 
 ## Setup configuration files
 
-First, let's create a configuration file for a container that uses XMPP user test1. You may change the name of the user below.
+The simplest way to get started is by [requesting a trial account](/trial) and following the configuration file template that you receive once your request is processed. In the example here, we use config-001.json and config-002.json to deploy two nodes.
 
-Copy and save this as /home/$USER/evio/config/config-001.json (the directory you created in the previous step) - *make sure you replace A.B.C.D with the IP address of your XMPP host:*
-
-```json
-{
-  "CFx": {
-    "Overlays": [ "MyTest" ]
-  },
-  "Logger": {
-    "LogLevel": "DEBUG",
-    "Directory": "/var/log/evio/"
-  },
-  "Signal": {
-    "Overlays": {
-      "MyTest": {
-        "HostAddress": "A.B.C.D",
-        "Port": "5222",
-        "Username": "test1@openfire.local",
-        "Password": "password_test1",
-        "AuthenticationMethod": "PASSWORD"
-      }
-    }
-  },
-  "Topology": {
-    "Overlays": {
-      "MyTest": {
-        "MaxSuccessors": 2,
-        "MaxOnDemandEdges": 3,
-        "Role": "Switch"
-      }
-    }
-  },
-  "LinkManager": {
-    "Stun": [ "stun.l.google.com:19302", "stun1.l.google.com:19302" ],
-    "Overlays": {
-      "MyTest": {
-        "Type": "TUNNEL",
-        "TapName": "tnl-"
-      }
-    }
-  },
-  "UsageReport": {
-    "Enabled": true,
-    "TimerInterval": 3600,
-    "WebService": "https://qdscz6pg37.execute-api.us-west-2.amazonaws.com/default/EvioUsageReport"
-  },
-  "BridgeController": {
-    "BoundedFlood": {
-      "OverlayId": "MyTest",
-      "LogDir": "/var/log/evio/",
-      "LogFilename": "bf.log",
-      "LogLevel": "DEBUG",
-      "BridgeName": "evio",
-      "DemandThreshold": "100M",
-      "FlowIdleTimeout": 60,
-      "FlowHardTimeout": 60,
-      "MulticastBroadcastInterval": 60,
-      "MaxBytes": 10000000,
-      "BackupCount": 2,
-      "ProxyListenAddress": "",
-      "ProxyListenPort": 5802,
-      "MonitorInterval": 60,
-      "MaxOnDemandEdges": 0
-    },
-    "Overlays": {
-      "MyTest": {
-        "NetDevice": {
-          "AutoDelete": true,
-          "Type": "OVS",
-          "SwitchProtocol": "BF",
-          "NamePrefix": "evio",
-          "MTU": 1410,
-          "AppBridge": {
-            "AutoDelete": true,
-            "Type": "OVS",
-            "NamePrefix": "appbr",
-            "IP4": "10.10.10.21",
-            "PrefixLen": 24,
-            "MTU": 1410
-          }
-        },
-        "SDNController": {
-          "ConnectionType": "tcp",
-          "HostName": "127.0.0.1",
-          "Port": "6633"
-        }
-      }
-    }
-  }
-}
-```
-
-To configure the second container, copy config-001.json to config-002.json, **and replace the following entry in the json file** to set up another EdgeVPN.io IP address:
-
-```
-        "IP4": "10.10.10.22",
-```
 
 ## Start the containers
 
@@ -163,29 +67,27 @@ Now you will run two containers, named evio001 and evio002, mapping the differen
 
 ### Instructions for Evio 20.12.1 and above:
 
-*NOTE* Evio versions 20.12.0+ have moved the configuration file location to /etc/opt/evio:
-
 ```
-docker run -d -v /home/$USER/evio/config/config-001.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/001:/var/log/evio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:20.12.2 /sbin/init
+docker run -d -v /home/$USER/evio/config/config-001.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/001:/var/log/evio/ --rm --privileged --name evio001 --network dkrnet edgevpnio/evio-node:21.9.0 /sbin/init
 
-docker run -d -v /home/$USER/evio/config/config-002.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/002:/var/log/evio/ --rm --privileged --name evio002 --network dkrnet edgevpnio/evio-node:20.12.2 /sbin/init
+docker run -d -v /home/$USER/evio/config/config-002.json:/etc/opt/evio/config.json -v /home/$USER/evio/logs/002:/var/log/evio/ --rm --privileged --name evio002 --network dkrnet edgevpnio/evio-node:21.9.0 /sbin/init
 ```
 
 
 ## Test your connection
 
-You can open a shell into the container evio001 (virtual IP address 10.10.10.21), and ping the evio002 node (virtual IP 10.10.10.22):
+You can open a shell into the container evio001 (virtual IP address 10.10.100.1), and ping the evio002 node (virtual IP 10.10.100.2):
 
 ```
 docker exec -it evio001 /bin/bash
-# ping 10.10.10.22
+# ping 10.10.100.2
 ```
 
 Or, the other way around:
 
 ```
 docker exec -it evio002 /bin/bash
-# ping 10.10.10.21
+# ping 10.10.100.1
 ```
 
 
