@@ -19,5 +19,5 @@ You can help us show our impact to our sponsors and other users by linking to th
 If you publish a research paper that has leveraged the software, please include as references: 
 
 * The DOI for the software release that you used - [10.5281/zenodo.4579871](https://doi.org/10.5281/zenodo.4579871) as of release 20.12.2
-* The paper [K. Subratie, S. Aditya, R. Figueiredo. (in press) "EdgeVPN: Self-organizing layer-2 virtual edge networks", Future Generation Computer Systems](https://doi.org/10.1016/j.future.2022.10.007)
+* The paper [K. Subratie, S. Aditya, R. Figueiredo. (in press) "EdgeVPN: Self-organizing layer-2 virtual edge networks", Future Generation Computer Systems](https://doi.org/10.1016/j.future.2022.10.007), DOI 10.1016/j.future.2022.10.007
 
