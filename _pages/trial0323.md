@@ -40,12 +40,14 @@ docker pull edgevpnio/evio-node:latest
 On computer 1:
 Then, copy the trial account configuration file config-001.json you have received to ~/.evio/config.json and start the container: 
 ```
+cp config-001.json ~/.evio/config.json
 docker run -d -v /home/$USER/.evio/config.json:/etc/opt/evio/config.json -v /var/log/evio/:/var/log/evio/ --restart always --privileged --name evio-node --network host edgevpnio/evio-node:latest
 ```
 
 On computer 2:
 Copy the trial account configuration file config-002.json you have received to ~/.evio/config.json and start the container: 
 ```
+cp config-002.json ~/.evio/config.json
 docker run -d -v /home/$USER/.evio/config.json:/etc/opt/evio/config.json -v /var/log/evio/:/var/log/evio/ --restart always --privileged --name evio-node --network host edgevpnio/evio-node:latest
 ```
 
