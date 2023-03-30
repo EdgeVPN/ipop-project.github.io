@@ -18,7 +18,7 @@ header:
 
 ## <i class="fas fa-cogs"></i> Deploy Evio Boostrap Server
 
-[Deploy Evio bootstrap SMPP/TURN server on AWS](/AWSbootstrap)
+[Deploy Evio bootstrap XMPP/TURN server on AWS](/AWSbootstrap)
 
 ## <i class="fas fa-cogs"></i> Use Evio to deploy Kubernetes across multiple edge providers
 
