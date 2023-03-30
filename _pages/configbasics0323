@@ -60,13 +60,9 @@ Before jumping into details, here is a configuration file template that is suffi
                 "Password": "turn_password"
             }
         ],
-        "Overlays": {
-            "MyTest": {
-                "IgnoredNetInterfaces": [
+        "IgnoredNetInterfaces": [
                     "ovs-system"
                 ]
-            }
-        }
     },
     "BridgeController": {
         "BoundedFlood": {
@@ -169,3 +165,13 @@ You may add more STUN and TURN servers to this list if you wish:
         ],
 ```
 
+# Configure interfaces to ignore
+
+If you have multiple interfaces in your computer, you want to configure EdgeVPN to ignore any interfaces that it is not supposed to use for tunneling. 
+This is configured as a list:
+
+```
+        "IgnoredNetInterfaces": [
+                    "ovs-system"
+                ]
+```                
