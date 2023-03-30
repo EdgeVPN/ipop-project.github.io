@@ -9,7 +9,7 @@ header:
 # Introduction
 
 The EdgeVPN.io team is hosting an XMPP+TURN service in the cloud to help new users get started using the software. 
-With this service, we provide prospective new users with configuration files that allow a plug-and-play deployment of Evio nodes using Docker containers for Linux on x86 (amd64) and arm64.
+With this service, we provide prospective new users with configuration files that allow a plug-and-play deployment of Evio nodes using Docker containers for Linux on both x86 (amd64) and arm64.
 
 To support ramping-up many new users, the trial accounts are limited to five nodes and expire in a 2-week period; these may change depending on user demand. 
 
@@ -26,7 +26,7 @@ To support ramping-up many new users, the trial accounts are limited to five nod
 
 Once you receive the configuration files, the easiest way to get started is to run Evio Docker containers, using the configuration files you received.
 In the example below, we assume that:
-1) you already have Docker installed on two computers, 
+1) you already have Docker installed on two Linux computers (x86/amd64 or arm64-based) running Ubuntu 20.04 or later, 
 3) you are using an account that is in the "docker" group (and can run Docker containers in --privileged mode),
 4) you received trial account configuration files configured with Evio IP addresses 10.10.100.1 and 10.10.100.2 and
 5) you repeat the steps below in both computers, each
