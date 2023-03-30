@@ -8,13 +8,13 @@ header:
 
 # Install and Run Evio from .deb package
 
-As of version 21.9.0, Evio can run on both amd64 platforms (the majority of commodity edge/cloud resources), as well as on armhf and arm64 (edge platforms such as Raspberry Pi) with Ubuntu Linux 18.04 and 20.04. 
+As of version 23.3.0, Evio can run on both amd64 platforms (the majority of commodity edge/cloud resources), as well as on armhf and arm64 (edge platforms such as Raspberry Pi) with Ubuntu Linux 18.04 and 20.04. 
 
 *NOTE* For Raspberry Pi users, *we currently only support Ubuntu 20.04 server*. Among other issues, Raspian does more aggressive use of DHCP and, while in principle it should be possible to work around it, we do not have a clean approach to supporting Raspian as of yet. If you would like to try Raspian, it requires disabling DHCP on *all* interfaces, as described at the end of this document.
 
 ## Install deb Package
 
-*Note:* The arm64 package has been tested in Raspberry Pi, Amazon ARM64 instances. For Raspberry Pi, Raspian is *not* supported - only Ubuntu.
+*Note:* The arm64 package has been tested in Ubuntu 20.04 Raspberry Pi, Amazon and Oracle Cloud ARM64 instances
 
 Before installing the package, you need to add the evio repository to your node - this step needs only be done once for a host:
 
