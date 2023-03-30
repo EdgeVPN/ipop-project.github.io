@@ -12,7 +12,7 @@ header:
 
 ## <i class="fas fa-cogs"></i> Deploy Evio nodes 
 
-[Deploy Docker EVio nodes (x86)](/dockeredgevpn)
+[Deploy Docker EVio nodes (x86)](/trial)
 
 [Deploy Evio nodes from Debian package (x86 and Raspberry Pi)](/install)
 
