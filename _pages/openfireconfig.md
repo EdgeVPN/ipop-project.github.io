@@ -8,7 +8,7 @@ header:
 
 # Introduction
 
-One of the open-source XMPP servers that can be used to configure EdgeVPN.io groups is [Openfire](https://www.igniterealtime.org/projects/openfire/). You may deploy Openfire in manhy different ways, such as installing on a physical host, [using a Docker container](https://hub.docker.com/r/quantumobject/docker-openfire), or [deploying on a cloud provider](https://bitnami.com/stack/openfire/cloud/aws). An XMPP server is necessary for the system to work - nodes in a virtual network use an XMPP server for the following purposes:
+One of the open-source XMPP servers that can be used to configure EdgeVPN.io groups is [Openfire](https://www.igniterealtime.org/projects/openfire/). You may deploy Openfire in many different ways, such as installing on a physical host, [using a Docker container](https://hub.docker.com/r/quantumobject/docker-openfire), or [deploying on a cloud provider](https://bitnami.com/stack/openfire/cloud/aws). An XMPP server is necessary for the system to work - nodes in a virtual network use an XMPP server for the following purposes:
 
 1. Network membership: the XMPP server holds identities to authenticate nodes, and also groups them together to specify which nodes are allowed to join the virtual network. A single XMPP server can be used to create multiple users (individual endpoints) and groups (the set of nodes that form a network).
 2. Peer discovery: nodes use XMPP "presence" messages to advertise themselves to other nodes. These are short messages that are sent periodically to the XMPP server, and forwarded to nodes belonging to a group
