@@ -27,9 +27,9 @@ To support ramping-up many new users, the trial accounts are limited to five nod
 Once you receive the configuration files, the easiest way to get started is to run Evio Docker containers, using the configuration files you received.
 In the example below, we assume that:
 1) you already have Docker installed on two computers, 
-2) you are using an account that can run Docker containers in --privileged mode,
-3) you received trial account configuration files configured with Evio IP addresses 10.10.100.1 and 10.10.100.2 and
-4) you repeat the steps below in both computers, each
+3) you are using an account that is in the "docker" group (and can run Docker containers in --privileged mode),
+4) you received trial account configuration files configured with Evio IP addresses 10.10.100.1 and 10.10.100.2 and
+5) you repeat the steps below in both computers, each
 
 On both computers 1 and 2:
 You can pull the Evio Docker image using:
