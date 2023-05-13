@@ -31,6 +31,14 @@ In the example below, we assume that:
 4) you received trial account configuration files configured with Evio IP addresses 10.10.100.1 and 10.10.100.2 and
 5) you repeat the steps below in both computers, each
 
+Note - on Ubuntu 22.04 you may need to install extra kernel modules and/or ensure Open vSwitch module is enabled. For Ubuntu 22.04 server on Raspberry Pi, run the following commands (for Ubuntu 22.04 server on x86_64 just run the two commands at the end)
+
+```
+sudo apt install -y linux-modules-extra-raspi
+echo openvswitch | sudo tee -a /etc/modules > /dev/null
+modprobe openvswitch
+```
+
 On both computers 1 and 2:
 You can pull the Evio Docker image using:
 ```
