@@ -14,7 +14,7 @@ excerpt: "Seamlessly connect edge resources with a scalable virtual Ethernet"
 {::nomarkdown}<div class="background-white"><div class="center">{:/nomarkdown}
 ### <i class="fas fa-cubes"></i> EdgeVPN.io is an open-source software for deploying scalable VPNs across distributed edge resources 
 
-EdgeVPN.io (aka, EVio) groups distributed nodes into a logical Ethernet. It has built-in packet capture, encryption, tunneling, forwarding, and NAT traversal support. Furthermore, it builds on standard protocols, flexible software-defined networking, and a scalable overlay network architecture suitable for containerized applications.
+EdgeVPN.io (EVio, for short) groups distributed nodes into a logical Ethernet. It has built-in packet capture, encryption, tunneling, forwarding, and NAT traversal support. Furthermore, it builds on standard protocols, flexible software-defined networking, and a scalable overlay network architecture suitable for containerized applications.
 
 
 
@@ -38,7 +38,7 @@ EdgeVPN.io implements a structured peer-to-peer overlay topology where nodes sel
 EVio self-assembles one or more overlays (logical layer-2 domains) at startup based on configuration parameters. It then self-repairs its topology and switching paths as new nodes arrive and existing ones depart.
 
 **Hybrid Overlays:**
-EVio overlays support both native Tincan and industry-standard Geneve Tunnels. Use fast, lightweight Geneve tunnels within your data center and NAT-traversing encrypted Tincan tunnels across the public Internet.
+EVio overlays support both native Tincan and industry-standard GENEVE Tunnels. Use fast, lightweight GENEVE tunnels within your data center and NAT-traversing encrypted Tincan tunnels across the public Internet.
 
 **Encrypted links:**
 EVio links are encrypted and authenticated with standard SSL-based transport-layer security implemented by the open-source [WebRTC framework](https://webrtc.org/). *Communication among nodes is private:* links use UDP-based Datagram TLS (DTLS) over NAT hole-punched tunnels
