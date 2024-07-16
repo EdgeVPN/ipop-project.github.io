@@ -32,7 +32,7 @@ In the example below, we assume that:
 5) you repeat the steps below in both computers, each
 
 ### Ubuntu 22.04 OpenvSwitch installation pre-requisite
-If you are using Ubuntu 22.04, you must install extra a package with kernel modules that contain Open vSwitch, and then enable the Open vSwitch module. The three following commands implement this by: 1) installing the module, 2) adding openvswitch to /etc/modules to load the openvswitch module on reboot, and 3) loading the module:
+If you are using Ubuntu 22.04, you must install and load the Open vSwitch module. The three following commands implement this by: 1) installing the module, 2) adding openvswitch to /etc/modules to load the openvswitch module on reboot, and 3) loading the module:
 
 
 ```
